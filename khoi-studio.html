@@ -1,0 +1,1615 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KHỐI Studio — Kiến trúc &amp; Nội thất Sài Gòn</title>
+<meta name="description" content="KHỐI là studio kiến trúc và nội thất tại Sài Gòn: nhà ở, nội thất, cải tạo và không gian thương mại. Dựng nhà để ở — không phải để chụp ảnh.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+:root{
+  --paper:#EDEBE6;
+  --paper-2:#E2DFD8;
+  --paper-3:#D3CFC5;
+  --ink:#0F0F0D;
+  --ink-2:#1A1A17;
+  --ink-3:#2B2B27;
+  --accent:#FF4A0E;
+  --accent-ink:#D23A00;
+  --accent-deep:#A82E00;
+  --muted:#5C5A55;
+  --muted-dark:#A29F96;
+  --blend:#EDEBE6;
+  --line:rgba(15,15,13,.13);
+  --line-strong:rgba(15,15,13,.32);
+  --line-dark:rgba(237,235,230,.12);
+  --line-dark-strong:rgba(237,235,230,.3);
+  --gutter:clamp(16px,2.6vw,40px);
+  --nav-h:72px;
+  --rule:3px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.85,0,.15,1);
+  --f-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0;padding:0}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html.is-loading,html.menu-open{overflow:hidden}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-display);font-size:16px;line-height:1.45;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+ul,ol{list-style:none}
+a{color:inherit}
+button{font:inherit;color:inherit}
+svg{display:block}
+::selection{background:var(--accent);color:var(--ink)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.sr-only{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0;padding:0;margin:-1px}
+.skip{position:fixed;left:var(--gutter);top:-120px;z-index:500;background:var(--accent);color:var(--ink);padding:14px 18px;font:700 13px/1 var(--f-mono);text-transform:uppercase;text-decoration:none}
+.skip:focus{top:12px}
+.wrap{position:relative;padding-inline:var(--gutter)}
+.mono{font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;line-height:1.55}
+.muted{color:var(--muted)}
+.dark{background:var(--ink);color:var(--paper);--line:var(--line-dark);--line-strong:var(--line-dark-strong);--muted:var(--muted-dark)}
+
+/* grid overlay */
+.grid-lines{position:absolute;inset:0 var(--gutter);pointer-events:none;z-index:0;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100% / 12) 100%;border-right:1px solid var(--line)}
+
+/* section header */
+.sec-head{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border-top:var(--rule) solid currentColor;padding-top:12px;margin-bottom:clamp(40px,7vw,110px)}
+.sec-head .n{grid-column:1/3}
+.sec-head .t{grid-column:3/8}
+.sec-head .x{grid-column:8/13;text-align:right;color:var(--muted)}
+.disp{font-weight:900;font-stretch:125%;text-transform:uppercase;line-height:.94;letter-spacing:-.03em}
+.h2{font-size:clamp(40px,7vw,120px)}
+.disp em,.accent-txt{font-style:normal;color:var(--accent-ink)}
+.dark .disp em{color:var(--accent)}
+
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;gap:14px;min-height:56px;padding:0 26px;font:700 13px/1 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:2px solid currentColor;background:transparent;color:inherit;overflow:hidden;cursor:pointer;isolation:isolate;transition:color .45s var(--ease),transform .55s var(--ease)}
+.btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--ink);transform:scaleX(0);transform-origin:right;transition:transform .6s var(--ease)}
+.btn:hover::before,.btn:focus-visible::before{transform:scaleX(1);transform-origin:left}
+.btn:hover,.btn:focus-visible{color:var(--paper)}
+.btn .arr{display:inline-block;transition:transform .5s var(--ease)}
+.btn:hover .arr{transform:translateX(6px)}
+.btn-accent{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.dark .btn::before{background:var(--paper)}
+.dark .btn:hover,.dark .btn:focus-visible{color:var(--ink)}
+
+/* reveal */
+.js .rv{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+
+/* ---------- preloader ---------- */
+.preloader{display:none}
+.js .preloader{display:block;position:fixed;inset:0;z-index:300;pointer-events:none}
+.pl-cols{position:absolute;inset:0;display:grid;grid-template-columns:repeat(6,1fr)}
+.pl-cols i{background:var(--ink);transition:transform .95s var(--ease-io);transition-delay:calc(var(--i) * 60ms)}
+.preloader.is-done .pl-cols i{transform:translateY(-101%)}
+.preloader.is-done .pl-cols i:nth-child(even){transform:translateY(101%)}
+.pl-inner{position:absolute;inset:0;padding:var(--gutter);display:flex;flex-direction:column;justify-content:space-between;color:var(--paper);transition:opacity .35s ease,transform .7s var(--ease)}
+.preloader.is-done .pl-inner{opacity:0;transform:translateY(-40px)}
+.pl-top{display:flex;justify-content:space-between;gap:16px}
+.pl-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+.pl-num{font-weight:900;font-stretch:125%;font-size:clamp(96px,22vw,340px);line-height:.8;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.pl-bar{height:3px;background:var(--accent);transform-origin:left;transform:scaleX(0);margin-top:16px}
+.pl-block{width:14px;height:14px;background:var(--accent);display:inline-block;margin-right:10px;vertical-align:-2px}
+
+/* ---------- cursor ---------- */
+.cur-dot,.cur-ring{display:none}
+.has-cursor .cur-dot,.has-cursor .cur-ring{display:grid;position:fixed;left:0;top:0;z-index:400;pointer-events:none;transition:opacity .3s}
+.cur-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--accent)}
+.cur-ring{width:40px;height:40px;margin:-20px 0 0 -20px;place-items:center;mix-blend-mode:difference}
+.cur-ring::before{content:"";position:absolute;inset:0;border:1.5px solid var(--blend);transition:transform .5s var(--ease),background-color .3s,border-color .3s}
+.cur-ring.is-link::before{transform:scale(1.6) rotate(45deg)}
+.cur-ring.is-down::before{transform:scale(.7)}
+.cur-ring.is-label{mix-blend-mode:normal}
+.cur-ring.is-label::before{transform:scale(2.3);background:var(--accent);border-color:var(--accent)}
+.cur-ring span{position:relative;font:700 11px/1 var(--f-mono);letter-spacing:.08em;color:var(--ink);white-space:nowrap;opacity:0;transform:scale(.5);transition:opacity .3s,transform .5s var(--ease)}
+.cur-ring.is-label span{opacity:1;transform:none}
+.cur-out .cur-dot,.cur-out .cur-ring,.cur-field .cur-dot,.cur-field .cur-ring{opacity:0}
+.has-cursor body,.has-cursor a,.has-cursor button,.has-cursor label,.has-cursor [data-cursor],.has-cursor .chip input{cursor:none}
+.has-cursor .field input,.has-cursor textarea{cursor:text}
+.has-cursor select{cursor:pointer}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:150;height:var(--nav-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding-inline:var(--gutter);color:var(--blend);mix-blend-mode:difference;pointer-events:none}
+.nav > *{pointer-events:auto}
+.brand{justify-self:start;display:inline-flex;align-items:center;gap:10px;font-weight:900;font-stretch:125%;font-size:22px;letter-spacing:-.02em;text-decoration:none}
+.brand-mark{position:relative;width:18px;height:18px;border:2px solid currentColor}
+.brand-mark::after{content:"";position:absolute;right:-2px;bottom:-2px;width:9px;height:9px;background:currentColor}
+.nav-mid{display:flex;gap:18px;align-items:center;white-space:nowrap}
+.nav-mid time{font-variant-numeric:tabular-nums}
+.menu-btn{justify-self:end;display:inline-flex;align-items:center;gap:12px;background:none;border:0;font:700 12px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;padding:14px 0;cursor:pointer;transition:transform .5s var(--ease)}
+.bars{position:relative;width:30px;height:12px}
+.bars i{position:absolute;left:0;right:0;height:2px;background:currentColor;transition:transform .55s var(--ease)}
+.bars i:first-child{top:0}
+.bars i:last-child{bottom:0}
+.menu-open .bars i:first-child{transform:translateY(5px) rotate(45deg)}
+.menu-open .bars i:last-child{transform:translateY(-5px) rotate(-45deg)}
+
+/* ---------- overlay menu ---------- */
+.menu{position:fixed;inset:0;z-index:140;display:flex;flex-direction:column;justify-content:space-between;gap:32px;padding:calc(var(--nav-h) + 16px) var(--gutter) var(--gutter);overflow-y:auto;visibility:hidden;clip-path:inset(0 0 100% 0);transition:clip-path .85s var(--ease-io),visibility 0s linear .85s}
+.menu.is-open{visibility:visible;clip-path:inset(0 0 0 0);transition:clip-path .85s var(--ease-io),visibility 0s linear 0s}
+.menu .grid-lines{position:fixed}
+.menu nav,.menu-foot{position:relative;z-index:1}
+.menu-list{border-top:1px solid var(--line-dark-strong)}
+.menu-list li{overflow:hidden;border-bottom:1px solid var(--line-dark-strong)}
+.menu-list a{display:flex;align-items:baseline;gap:clamp(12px,2.4vw,40px);padding:.1em 0 .02em;text-decoration:none;transform:translateY(110%);transition:transform .7s var(--ease) 0s}
+.menu-list a:focus-visible{outline-offset:-3px}
+.menu.is-open .menu-list a{transform:none;transition:transform 1s var(--ease) calc(.3s + var(--i) * 70ms)}
+.mi-num{font-family:var(--f-mono);font-size:12px;color:var(--muted-dark);min-width:2.5em}
+.mi-txt{font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(38px,min(8.4vw,10.5vh),136px);line-height:1.04;letter-spacing:-.03em;transition:color .3s,transform .6s var(--ease)}
+.menu-list a:hover .mi-txt,.menu-list a:focus-visible .mi-txt{color:var(--accent);transform:translateX(.12em) skewX(-6deg)}
+.menu-foot{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;opacity:0;transition:opacity .4s}
+.menu.is-open .menu-foot{opacity:1;transition:opacity .8s .7s}
+.menu-foot a{text-decoration:none}
+.menu-foot a:hover{color:var(--accent)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;padding-top:calc(var(--nav-h) + 4px);overflow:hidden}
+.hero-top{position:relative;z-index:1;margin-inline:var(--gutter);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding:12px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--line-strong)}
+.hero-top p:nth-child(2){text-align:center}
+.hero-top p:nth-child(3){text-align:center}
+.hero-top p:last-child{text-align:right}
+.live{display:inline-block;width:8px;height:8px;background:var(--accent);margin-right:8px;vertical-align:1px;animation:blink 1.1s steps(2,jump-none) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-mid{flex:1;position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;padding:clamp(24px,4vh,56px) var(--gutter) clamp(20px,3vh,40px)}
+.hero-copy{grid-column:1/7;position:relative;z-index:4}
+.hero-lede{font-weight:800;font-size:clamp(24px,2.5vw,40px);line-height:1.08;letter-spacing:-.02em;max-width:17ch}
+.hero-lede em{font-style:normal;color:var(--accent-ink)}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 26px}
+.hero-tags li{border:1px solid var(--ink);padding:6px 10px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.iso{position:absolute;z-index:1;right:var(--gutter);bottom:9vh;width:min(46%,620px);height:clamp(300px,56vh,560px);perspective:2600px;--u:clamp(16px,1.7vw,28px);pointer-events:none}
+.iso-world{position:absolute;left:50%;top:66%;transform-style:preserve-3d;transform:rotateX(-30deg) rotateY(45deg)}
+.cube{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.face{position:absolute;left:0;top:0;display:block;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1.5px solid var(--ink);background:var(--paper)}
+.f-front,.f-back{background-color:var(--paper-2)}
+.f-left,.f-right{background-color:var(--paper-3)}
+.v-hatch .f-left,.v-hatch .f-right,.v-hatch .f-front,.v-hatch .f-back{background-image:repeating-linear-gradient(135deg,var(--line-strong) 0 1px,transparent 1px 7px)}
+.v-win .f-front,.v-win .f-back,.v-win .f-left,.v-win .f-right{background-image:repeating-linear-gradient(to bottom,transparent 0 calc(var(--u) * .5 - 2px),var(--ink) calc(var(--u) * .5 - 2px) calc(var(--u) * .5))}
+.v-ink .face{background-color:var(--ink-2);border-color:var(--ink)}
+.v-ink .f-top{background-color:var(--ink-3)}
+.v-ink .f-front,.v-ink .f-back,.v-ink .f-left,.v-ink .f-right{background-image:repeating-linear-gradient(to right,transparent 0 calc(var(--u) * .5 - 1px),var(--line-dark-strong) calc(var(--u) * .5 - 1px) calc(var(--u) * .5))}
+.v-acc .f-top{background-color:var(--accent)}
+.v-acc .f-front,.v-acc .f-back{background-color:var(--accent-ink)}
+.v-acc .f-left,.v-acc .f-right{background-color:var(--accent-deep)}
+.f-plane{background:transparent;border:1px dashed var(--line-strong);background-image:linear-gradient(var(--line-strong) 1px,transparent 1px),linear-gradient(to right,var(--line-strong) 1px,transparent 1px);background-size:var(--u) var(--u)}
+.hero-title{position:relative;z-index:2;display:flex;padding-inline:var(--gutter)}
+.hero-word{display:flex;align-items:flex-end;white-space:nowrap;font-weight:900;font-stretch:125%;font-size:27vw;letter-spacing:-.045em;text-transform:uppercase;will-change:transform}
+.hero-word .ch{display:block;overflow:hidden;line-height:.86;padding-top:.5em;margin-top:-.5em}
+.hero-word .ch > span{display:block}
+.js .hero-word .ch > span{transform:translateY(108%)}
+.is-ready .hero-word .ch > span{transform:none;transition:transform 1.3s var(--ease) calc(var(--i) * 85ms)}
+.js .hero-copy > *{opacity:0;transform:translateY(24px)}
+.is-ready .hero-copy > *{opacity:1;transform:none;transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.is-ready .hero-copy > :nth-child(2){transition-delay:.12s}
+.is-ready .hero-copy > :nth-child(3){transition-delay:.24s}
+.js .iso{opacity:0}
+.is-ready .iso{opacity:1;transition:opacity 1.4s ease .3s}
+.hero-scroll{position:absolute;z-index:4;left:calc(var(--gutter) + 50%);top:calc(var(--nav-h) + 76px);display:flex;flex-direction:column;align-items:center;gap:10px}
+.hs-line{position:relative;width:1px;height:64px;background:var(--line-strong);overflow:hidden}
+.hs-line::after{content:"";position:absolute;inset:0;background:var(--accent);animation:hs 2s var(--ease-io) infinite}
+@keyframes hs{0%{transform:translateY(-100%)}50%{transform:translateY(0)}100%{transform:translateY(100%)}}
+
+/* ---------- manifesto ---------- */
+.manifesto{position:relative;padding:clamp(90px,12vw,190px) 0}
+.mani-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr))}
+.mani-aside{grid-column:1/3;display:flex;flex-direction:column;gap:20px;padding-right:16px}
+.mani-mark{width:56px;height:56px;border:2px solid var(--ink);position:relative}
+.mani-mark::after{content:"";position:absolute;right:-2px;bottom:-2px;width:28px;height:28px;background:var(--accent)}
+.mani-text{grid-column:3/13;font-weight:800;font-size:clamp(28px,4.3vw,70px);line-height:1.06;letter-spacing:-.025em}
+.mani-text em{font-style:normal;color:var(--accent-ink)}
+.mani-text .w{opacity:.15;transition:opacity .2s linear}
+.mani-sign{grid-column:3/13;margin-top:clamp(28px,4vw,56px);display:flex;flex-wrap:wrap;gap:8px 32px}
+
+/* ---------- work (horizontal) ---------- */
+.work{position:relative}
+.work-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding:calc(var(--nav-h) + 4px) 0 clamp(16px,3vh,32px)}
+.work-head{position:relative;z-index:1;margin-inline:var(--gutter);display:flex;justify-content:space-between;align-items:center;gap:16px;border-top:var(--rule) solid var(--paper);padding-top:12px}
+.work-count{font-variant-numeric:tabular-nums}
+.work-count b{color:var(--accent);font-weight:700}
+.work-prog{position:relative;z-index:1;height:2px;background:var(--line-dark-strong);margin:12px var(--gutter) clamp(16px,3vh,28px)}
+.work-prog i{position:absolute;inset:0;background:var(--accent);transform-origin:left;transform:scaleX(0)}
+.work-track{position:relative;z-index:1;flex:1;min-height:0;display:flex;gap:clamp(14px,1.6vw,24px);padding-inline:var(--gutter);will-change:transform}
+.work-intro{flex:0 0 clamp(280px,30vw,470px);display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding-right:clamp(0px,2vw,32px)}
+.work-h{font-size:clamp(48px,6.2vw,108px)}
+.work-sub{font-size:clamp(16px,1.25vw,20px);line-height:1.45;color:var(--muted);max-width:34ch}
+.card{position:relative;flex:0 0 clamp(300px,30vw,480px);display:flex;flex-direction:column;border:1px solid var(--line-dark-strong);background:var(--ink-2);transition:border-color .4s,transform .6s var(--ease)}
+.card:hover{border-color:var(--accent)}
+.card-top{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line-dark-strong)}
+.card-top b{color:var(--accent);font-weight:700}
+.card-art{flex:1;min-height:0;display:grid;place-items:center;padding:clamp(12px,2vh,24px);overflow:hidden;background-image:linear-gradient(var(--line-dark) 1px,transparent 1px),linear-gradient(to right,var(--line-dark) 1px,transparent 1px);background-size:24px 24px;background-position:-1px -1px}
+.card-art svg{width:100%;height:100%;max-height:100%;transition:transform .9s var(--ease)}
+.card:hover .card-art svg{transform:scale(1.045)}
+.card-body{padding:16px;border-top:1px solid var(--line-dark-strong)}
+.card-title{font-weight:900;font-stretch:112%;text-transform:uppercase;font-size:clamp(24px,2.2vw,36px);line-height:.98;letter-spacing:-.02em}
+.card-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;margin-top:14px}
+.card-meta dt{color:var(--muted-dark);font-size:10px}
+.card-meta dd{font-size:12px}
+.card-end{background:var(--accent);color:var(--ink);border-color:var(--accent)}
+.card-end:hover{border-color:var(--paper)}
+.card-end a{flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:24px;padding:20px;text-decoration:none}
+.card-end .disp{font-size:clamp(48px,5.6vw,96px)}
+.card-end .go{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--ink);padding-top:14px}
+.card-end a:focus-visible{outline-color:var(--ink);outline-offset:-8px}
+
+/* svg art */
+.art .l{fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter}
+.art .t{stroke:var(--line-dark-strong);stroke-width:1}
+.art .w{stroke-width:3.5}
+.art .a{stroke:var(--accent)}
+.art .af{fill:var(--accent)}
+.art .ray{fill:none;stroke:var(--accent);stroke-width:1;stroke-dasharray:3 5}
+.js .art [pathLength]{stroke-dasharray:1 2;stroke-dashoffset:1}
+.art.in :is(path,line,polyline,polygon,rect,circle,ellipse){animation:art-draw 1.6s var(--ease) both} /* ponytail: not [pathLength], Chrome skips restyle of camelCase SVG attr selectors on class change */
+@keyframes art-draw{to{stroke-dashoffset:0}}
+.js .art .af,.js .art .ray{opacity:0;transition:opacity .8s ease 1.2s}
+.art.in .af,.art.in .ray{opacity:1}
+
+/* ---------- services ---------- */
+.services{position:relative;padding:clamp(90px,10vw,170px) 0}
+.svc-intro{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 0;margin-bottom:clamp(40px,6vw,90px);align-items:end}
+.svc-intro h2{grid-column:1/9}
+.svc-intro p{grid-column:9/13;font-size:clamp(16px,1.2vw,19px);color:var(--muted)}
+.svc-list{position:relative;z-index:1;border-top:var(--rule) solid var(--ink)}
+.svc{border-bottom:1px solid var(--ink)}
+.svc-h{font:inherit}
+.svc-btn{position:relative;width:100%;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;padding:clamp(18px,2.4vw,34px) 0;background:none;border:0;text-align:left;cursor:pointer;overflow:hidden;isolation:isolate}
+.svc-btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+.svc-btn:hover::before,.svc-btn:focus-visible::before,.svc.is-open .svc-btn::before{transform:scaleX(1)}
+.svc-btn:focus-visible{outline-offset:-3px}
+.svc-num{grid-column:1/2;padding-left:10px}
+.svc-name{grid-column:2/9;font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(26px,4.9vw,82px);line-height:1;letter-spacing:-.03em;transition:transform .7s var(--ease)}
+.svc-btn:hover .svc-name,.svc.is-open .svc-name{transform:translateX(clamp(8px,1.4vw,24px))}
+.svc-tag{grid-column:9/12}
+.svc-plus{grid-column:12/13;justify-self:end;position:relative;width:40px;height:40px;margin-right:10px;border:2px solid currentColor}
+.svc-plus::before,.svc-plus::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:2px;margin:-1px 0 0 -8px;background:currentColor;transition:transform .5s var(--ease)}
+.svc-plus::after{transform:rotate(90deg)}
+.svc.is-open .svc-plus::after{transform:rotate(0)}
+.svc.is-open .svc-plus{background:var(--ink);color:var(--accent)}
+.svc-panel{display:grid;grid-template-rows:1fr;transition:grid-template-rows .75s var(--ease)}
+.js .svc-panel{grid-template-rows:0fr}
+.js .svc.is-open .svc-panel{grid-template-rows:1fr}
+.svc-panel > div{overflow:hidden;min-height:0}
+.svc-panel-in{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 0;padding:clamp(24px,3vw,40px) 0 clamp(32px,4vw,56px)}
+.svc-desc{grid-column:2/7;font-size:clamp(20px,1.9vw,30px);font-weight:700;line-height:1.15;letter-spacing:-.015em;padding-right:24px}
+.svc-deliver{grid-column:7/10;display:flex;flex-direction:column;gap:6px;padding-right:16px}
+.svc-deliver li::before{content:"";display:inline-block;width:7px;height:7px;background:var(--accent);margin-right:10px;vertical-align:1px}
+.svc-meta{grid-column:10/13;display:flex;flex-direction:column;justify-content:space-between;gap:16px;align-items:flex-start}
+.svc-meta strong{display:block;font-family:var(--f-display);font-weight:900;font-stretch:115%;font-size:clamp(20px,1.8vw,28px);letter-spacing:-.01em;text-transform:none}
+
+/* ---------- process ---------- */
+.process{position:relative;padding:clamp(90px,10vw,170px) 0}
+.proc-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr))}
+.proc-visual{grid-column:1/7;align-self:start;position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));height:calc(100svh - var(--nav-h));display:flex;flex-direction:column;justify-content:center;padding:16px clamp(16px,3vw,48px) 16px 0}
+.plan-frame{position:relative;border:1px solid var(--line-dark-strong);padding:clamp(10px,1.6vw,22px);background-image:linear-gradient(var(--line-dark) 1px,transparent 1px),linear-gradient(to right,var(--line-dark) 1px,transparent 1px);background-size:20px 20px}
+.plan{width:100%;height:auto;max-height:calc(100svh - var(--nav-h) - 140px)}
+.plan-cap{display:flex;justify-content:space-between;gap:16px;margin-top:12px}
+.plan-cap b{color:var(--accent);font-weight:700}
+.plan .l{fill:none;stroke:var(--paper);stroke-width:1.25;stroke-linecap:square}
+.plan .w{stroke-width:5}
+.plan .t{stroke:var(--line-dark-strong);stroke-width:1}
+.plan .a{stroke:var(--accent)}
+.plan .bub{fill:var(--ink)}
+.plan text{fill:var(--paper);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em}
+.plan text.acc{fill:var(--accent)}
+.js .plan [pathLength]{stroke-dasharray:1 2;stroke-dashoffset:1}
+.js .plan text{opacity:0;transition:opacity .5s}
+.js .plan .pg.on text{opacity:1}
+.proc-steps{grid-column:8/13}
+.step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;gap:16px;border-top:1px solid var(--line-dark-strong);padding:40px 0;transition:opacity .5s}
+.js .step{opacity:.38}
+.js .step.is-active{opacity:1}
+.step-n{font-weight:900;font-stretch:125%;font-size:clamp(64px,8.6vw,150px);line-height:.85;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.5px var(--paper);transition:color .5s,-webkit-text-stroke-color .5s}
+.step.is-active .step-n{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.step h3{font-weight:900;font-stretch:115%;text-transform:uppercase;font-size:clamp(28px,3.2vw,52px);line-height:1;letter-spacing:-.02em}
+.step p{max-width:42ch;color:var(--muted-dark);font-size:clamp(16px,1.2vw,19px)}
+.step .dur{color:var(--accent)}
+
+/* ---------- studio ---------- */
+.studio{position:relative;padding:clamp(90px,10vw,170px) 0}
+.studio-lead{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 0;align-items:end}
+.studio-lead h2{grid-column:1/10;font-size:clamp(36px,5.8vw,100px)}
+.studio-lead p{grid-column:10/13;color:var(--muted)}
+.stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:var(--rule) solid var(--ink);border-bottom:1px solid var(--ink);margin:clamp(48px,7vw,100px) 0}
+.stat{padding:18px clamp(10px,1.4vw,22px) 26px;border-right:1px solid var(--line-strong);min-width:0}
+.stat:first-child{padding-left:0}
+.stat:last-child{border-right:0}
+.stat-num{display:flex;align-items:flex-start;font-weight:900;font-stretch:100%;font-size:clamp(34px,4.6vw,80px);line-height:.9;letter-spacing:-.04em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat-num sup{font-size:.3em;color:var(--accent-ink);margin-left:.08em;line-height:1;letter-spacing:0}
+.stat .mono{margin-top:14px;display:block}
+.team-head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:20px;border-top:1px solid var(--ink);padding-top:12px}
+.team{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,24px)}
+.portrait{position:relative;aspect-ratio:3/4;overflow:hidden;border:1px solid var(--ink);background:var(--paper-2);background-image:repeating-linear-gradient(135deg,var(--line) 0 1px,transparent 1px 9px)}
+.portrait::after{content:"";position:absolute;left:0;top:0;width:28%;height:22%;background:var(--accent);transform:translateX(-101%);transition:transform .7s var(--ease)}
+.person:hover .portrait::after{transform:none}
+.portrait svg{position:absolute;inset:auto 0 0 0;width:100%;height:78%}
+.portrait svg .l{fill:var(--paper);stroke:var(--ink);stroke-width:1.5}
+.portrait .ini{position:absolute;right:10px;top:6px;font-weight:900;font-stretch:125%;font-size:clamp(36px,4.6vw,72px);line-height:1;letter-spacing:-.04em}
+.person h4{margin-top:12px;font-weight:800;font-size:clamp(17px,1.4vw,22px);line-height:1.15}
+.person p{color:var(--muted)}
+.awards{position:relative;z-index:1;margin-top:clamp(56px,8vw,120px)}
+.aw-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px 0;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line-strong);transition:padding .5s var(--ease),background-color .4s}
+.aw-row:hover{padding-left:12px;background:var(--paper-2)}
+.aw-y{grid-column:1/3}
+.aw-n{grid-column:3/8;font-weight:800;font-size:clamp(17px,1.5vw,24px);line-height:1.15;padding-right:16px}
+.aw-o{grid-column:8/11;color:var(--muted)}
+.aw-p{grid-column:11/13;text-align:right}
+
+/* ---------- marquee ---------- */
+.marquee{position:relative;overflow:hidden;padding:clamp(40px,6vw,90px) 0}
+.mq-row{display:flex;width:112%;margin-left:-6%;white-space:nowrap}
+.mq-row.r1{background:var(--ink);color:var(--paper);transform:rotate(-2.2deg)}
+.mq-row.r2{background:var(--accent);color:var(--ink);transform:rotate(1.6deg);margin-top:-6px}
+.mq-inner{display:flex;flex:none;will-change:transform}
+.mq-set{display:flex;align-items:center;flex:none;font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:clamp(40px,7vw,120px);line-height:1.1;letter-spacing:-.02em;padding:.08em 0}
+.mq-set > span{padding:0 .28em}
+.mq-set .sq{display:inline-block;width:.32em;height:.32em;padding:0;background:currentColor}
+.r1 .mq-set .sq{background:var(--accent)}
+.r1 .o{color:transparent;-webkit-text-stroke:2px var(--paper)}
+.r2 .o{color:transparent;-webkit-text-stroke:2px var(--ink)}
+
+/* ---------- testimonials ---------- */
+.voices{position:relative;padding:clamp(90px,10vw,170px) 0}
+.voices-h{position:relative;z-index:1;font-size:clamp(40px,7vw,120px);margin-bottom:clamp(40px,6vw,80px)}
+.voice{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px 0;padding:clamp(28px,4vw,56px) 0;border-top:1px solid var(--ink)}
+.voice:last-child{border-bottom:var(--rule) solid var(--ink)}
+.voice-n{grid-column:1/3;display:flex;flex-direction:column;gap:6px}
+.voice-n .q{font-weight:900;font-size:clamp(64px,7vw,120px);line-height:.7;color:var(--accent-ink)}
+.voice blockquote{grid-column:3/10;padding-right:24px}
+.voice blockquote p{font-weight:700;font-size:clamp(22px,2.5vw,40px);line-height:1.14;letter-spacing:-.02em}
+.voice figcaption{grid-column:10/13;display:flex;flex-direction:column;gap:4px;border-left:1px solid var(--ink);padding-left:16px;align-self:start}
+.voice figcaption strong{font-family:var(--f-display);font-size:18px;font-weight:800;text-transform:none;letter-spacing:0}
+
+/* ---------- contact ---------- */
+.contact{position:relative;padding:clamp(90px,10vw,170px) 0 clamp(70px,8vw,120px)}
+.cta-wrap{position:relative;z-index:1;margin-bottom:clamp(48px,7vw,100px)}
+.cta-big{display:inline-block;font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:11vw;line-height:.9;letter-spacing:-.045em;white-space:nowrap}
+.cta-big .line{display:block;overflow:hidden;padding-top:.2em;margin-top:-.14em}
+.cta-big .line > span{display:block}
+.cta-big em{font-style:normal;color:transparent;-webkit-text-stroke:.025em var(--ink);transition:color .5s,-webkit-text-stroke-color .5s}
+.cta-big:hover em{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.js .cta-big .line > span{transform:translateY(105%)}
+.cta-big.in .line > span{transform:none;transition:transform 1.25s var(--ease)}
+.cta-big.in .line:nth-child(2) > span{transition-delay:.12s}
+.contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px 0}
+.contact-info{grid-column:1/5;display:flex;flex-direction:column;gap:28px;padding-right:24px}
+.contact-info .intro{font-size:clamp(18px,1.5vw,24px);font-weight:700;line-height:1.25;letter-spacing:-.01em}
+.contact-info dl{display:grid;gap:18px;border-top:var(--rule) solid var(--ink);padding-top:18px}
+.contact-info dt{color:var(--muted)}
+.contact-info dd{font-size:18px;font-weight:700;margin-top:2px}
+.contact-info dd a{text-decoration:none;background:linear-gradient(var(--accent),var(--accent)) 0 100%/100% 2px no-repeat;transition:background-size .5s var(--ease)}
+.contact-info dd a:hover{background-size:100% 100%}
+.brief-box{grid-column:6/13;position:relative;padding:clamp(20px,3vw,48px)}
+.brief-head{display:flex;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line-dark-strong);padding-bottom:14px;margin-bottom:28px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:28px;min-width:0}
+.field label,.chips legend{color:var(--muted-dark)}
+.field input,.field textarea,.select select{width:100%;font:500 clamp(18px,1.5vw,22px)/1.3 var(--f-display);color:var(--paper);background:transparent;border:0;border-bottom:2px solid var(--line-dark-strong);border-radius:0;padding:10px 0;-webkit-appearance:none;appearance:none;transition:border-color .3s}
+.field textarea{resize:vertical;min-height:120px}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted-dark);opacity:.75}
+.field input:focus,.field textarea:focus,.select select:focus{border-bottom-color:var(--accent)}
+.field :focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.field input:user-invalid,.field textarea:user-invalid,.select select:user-invalid{border-bottom-color:var(--accent)}
+.select{position:relative}
+.select::after{content:"";position:absolute;right:4px;top:50%;width:10px;height:10px;margin-top:-8px;border-right:2px solid var(--paper);border-bottom:2px solid var(--paper);transform:rotate(45deg);pointer-events:none}
+.select select{padding-right:28px;cursor:pointer}
+.select option{color:var(--ink);background:var(--paper)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.chips{border:0;margin-bottom:28px;min-width:0}
+.chips legend{padding:0;margin-bottom:12px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.chip span{display:inline-block;padding:11px 14px;border:1.5px solid var(--line-dark-strong);font:500 12px/1 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;transition:background-color .3s,color .3s,border-color .3s}
+.chip:hover span{border-color:var(--paper)}
+.chip input:checked + span{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+.chip input:focus-visible + span{outline:2px solid var(--accent);outline-offset:3px}
+.form-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.form-foot .mono{color:var(--muted-dark);max-width:30ch}
+.form-success{display:flex;flex-direction:column;gap:20px;align-items:flex-start;padding:24px 0}
+.form-success:focus{outline:none}
+.form-success .disp{font-size:clamp(44px,5vw,84px);color:var(--accent)}
+.form-success p{font-size:clamp(18px,1.4vw,22px);max-width:36ch}
+.ok-mark{width:64px;height:64px;background:var(--accent);position:relative}
+.ok-mark::after{content:"";position:absolute;left:22px;top:12px;width:16px;height:30px;border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);transform:rotate(45deg)}
+
+/* ---------- footer ---------- */
+.footer{position:relative;padding:clamp(56px,7vw,100px) 0 22px;overflow:hidden}
+.foot-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px 0}
+.foot-col{grid-column:span 3;display:flex;flex-direction:column;gap:8px;padding-right:16px}
+.foot-col h2{color:var(--muted-dark);margin-bottom:6px}
+.foot-col a{text-decoration:none;align-self:flex-start;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .5s var(--ease),color .3s}
+.foot-col a:hover{background-size:100% 1px;color:var(--accent)}
+.foot-col .big{font-weight:800;font-size:clamp(18px,1.6vw,24px);line-height:1.2}
+.foot-giant{position:relative;z-index:1;display:flex;margin-top:clamp(40px,6vw,90px)}
+.foot-giant span{display:block;white-space:nowrap;font-weight:900;font-stretch:125%;text-transform:uppercase;font-size:18vw;line-height:.86;padding-top:.18em;letter-spacing:-.045em;color:transparent;-webkit-text-stroke:1.5px var(--paper);transition:color .6s var(--ease),-webkit-text-stroke-color .6s}
+.foot-giant:hover span{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.foot-bar{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;margin-top:20px;padding-top:16px;border-top:1px solid var(--line-dark-strong);color:var(--muted-dark)}
+.foot-bar a{text-decoration:none}
+.foot-bar a:hover{color:var(--accent)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .iso{width:52%}
+}
+@media (max-width:767px){
+  :root{--nav-h:60px}
+  .grid-lines{background-size:25% 100%}
+  .sec-head{grid-template-columns:1fr 1fr}
+  .sec-head .n{grid-column:1}
+  .sec-head .t{grid-column:2;text-align:right}
+  .sec-head .x{display:none}
+  .nav-mid .hide-sm{display:none}
+  .brand{font-size:19px}
+  .hero-top{grid-template-columns:1fr 1fr}
+  .hero-top p:nth-child(2),.hero-top p:nth-child(3){display:none}
+  .hero-mid{grid-template-columns:1fr;align-items:start;gap:8px}
+  .hero-copy{grid-column:1;order:2}
+  .iso{position:relative;order:1;right:auto;bottom:auto;width:100%;height:clamp(200px,32vh,280px);--u:17px}
+  .iso-world{top:72%}
+  .hero-scroll{display:none}
+  .mani-aside{grid-column:1/-1;flex-direction:row;align-items:center;margin-bottom:28px}
+  .mani-mark{width:40px;height:40px;flex:none}
+  .mani-mark::after{width:20px;height:20px}
+  .mani-text,.mani-sign{grid-column:1/-1}
+  .svc-intro h2,.svc-intro p{grid-column:1/-1}
+  .svc-num{grid-column:1/3}
+  .svc-name{grid-column:3/11}
+  .svc-tag{display:none}
+  .svc-plus{grid-column:11/13;width:34px;height:34px}
+  .svc-panel-in > *{grid-column:1/-1!important;padding-right:0!important}
+  .proc-visual{grid-column:1/-1;z-index:2;height:auto;padding:10px 0 12px;background:var(--ink)}
+  .plan{max-height:36svh}
+  .proc-steps{grid-column:1/-1}
+  .step{min-height:56vh}
+  .studio-lead h2,.studio-lead p{grid-column:1/-1}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding-left:0}
+  .stat:nth-child(2){border-right:0;padding-left:14px}
+  .stat:nth-child(4){padding-left:14px}
+  .stat:nth-child(n+3){border-top:1px solid var(--line-strong)}
+  .stat-num{font-size:clamp(34px,10.5vw,64px)}
+  .team{grid-template-columns:1fr 1fr}
+  .aw-y{grid-column:1/4}
+  .aw-n{grid-column:4/13}
+  .aw-o,.aw-p{grid-column:4/13;text-align:left}
+  .voice-n{grid-column:1/-1;flex-direction:row;align-items:center;gap:16px}
+  .voice-n .q{font-size:56px}
+  .voice blockquote,.voice figcaption{grid-column:1/-1;padding-right:0}
+  .contact-info,.brief-box{grid-column:1/-1;padding-right:0}
+  .brief-box{padding:20px 16px}
+  .row2{grid-template-columns:1fr}
+  .foot-col{grid-column:span 6}
+}
+@media (max-width:420px){
+  .foot-col{grid-column:1/-1}
+}
+@media (min-width:768px) and (max-width:1023px){
+  .hero-copy{grid-column:1/8}
+  .proc-visual{grid-column:1/7}
+  .proc-steps{grid-column:7/13;padding-left:16px}
+  .svc-name{grid-column:2/10}
+  .svc-tag{grid-column:10/12}
+  .team{grid-template-columns:1fr 1fr}
+}
+/* horizontal section fallback: mobile + reduced motion */
+@media (max-width:767px),(prefers-reduced-motion:reduce){
+  .work{height:auto!important}
+  .work-pin{position:relative;height:auto;overflow:visible;padding-bottom:clamp(56px,8vw,100px)}
+  .work-prog{display:none}
+  .work-track{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));transform:none!important;margin-top:24px}
+  .work-intro{grid-column:1/-1;padding-right:0}
+  .card{min-height:0}
+  .card-art{flex:none;aspect-ratio:4/3}
+  .card-end a{min-height:260px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .js .preloader{display:none}
+  .js .hero-word .ch > span,.js .rv,.js .cta-big .line > span,.js .hero-copy > *{transform:none!important;opacity:1!important}
+  .js .iso{opacity:1}
+  .mani-text .w{opacity:1!important}
+  .js .art [pathLength],.js .plan [pathLength]{stroke-dashoffset:0!important}
+  .js .art .af,.js .art .ray,.js .plan text{opacity:1!important}
+  .js .step{opacity:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Bỏ qua, đến nội dung chính</a>
+
+<div class="preloader" aria-hidden="true">
+  <div class="pl-cols"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i></div>
+  <div class="pl-inner">
+    <div class="pl-top mono"><span><span class="pl-block"></span>KHỐI Studio</span><span>Đang dựng khối…</span></div>
+    <div>
+      <div class="pl-bottom"><span class="mono">Kiến trúc / Nội thất<br>Sài Gòn — từ 2014</span><span class="pl-num">000</span></div>
+      <div class="pl-bar"></div>
+    </div>
+  </div>
+</div>
+
+<div class="cur-dot" aria-hidden="true"></div>
+<div class="cur-ring" aria-hidden="true"><span>XEM</span></div>
+
+<header class="nav">
+  <a class="brand" href="#top" aria-label="KHỐI Studio, về đầu trang"><span class="brand-mark" aria-hidden="true"></span>KHỐI</a>
+  <p class="nav-mid mono"><span class="hide-sm">Sài Gòn</span><time data-clock>--:--:--</time><span class="hide-sm">GMT+7</span></p>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu" data-magnetic="0.3"><span class="menu-btn-label">Menu</span><span class="bars" aria-hidden="true"><i></i><i></i></span></button>
+</header>
+
+<div class="menu dark" id="menu" role="dialog" aria-modal="true" aria-label="Menu điều hướng" aria-hidden="true" inert>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <nav aria-label="Menu chính">
+    <ol class="menu-list">
+      <li><a href="#tuyen-ngon" style="--i:0"><span class="mi-num">02</span><span class="mi-txt">Tuyên ngôn</span></a></li>
+      <li><a href="#du-an" style="--i:1"><span class="mi-num">03</span><span class="mi-txt">Dự án</span></a></li>
+      <li><a href="#dich-vu" style="--i:2"><span class="mi-num">04</span><span class="mi-txt">Dịch vụ</span></a></li>
+      <li><a href="#quy-trinh" style="--i:3"><span class="mi-num">05</span><span class="mi-txt">Quy trình</span></a></li>
+      <li><a href="#studio" style="--i:4"><span class="mi-num">06</span><span class="mi-txt">Studio</span></a></li>
+      <li><a href="#lien-he" style="--i:5"><span class="mi-num">08</span><span class="mi-txt">Liên hệ</span></a></li>
+    </ol>
+  </nav>
+  <div class="menu-foot mono">
+    <a href="mailto:xinchao@khoistudio.vn">xinchao@khoistudio.vn</a>
+    <a href="tel:+842839301488">028 3930 1488</a>
+    <span>128 Võ Văn Tần, Quận 3, TP.HCM</span>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- 01 HERO -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="hero-top mono">
+      <p>(01) — Studio kiến trúc &amp; nội thất</p>
+      <p>10°46′N — 106°42′E</p>
+      <p>Thành lập 2014 · Sài Gòn</p>
+      <p><span class="live" aria-hidden="true"></span>Nhận dự án Q2/2027</p>
+    </div>
+    <div class="hero-mid">
+      <div class="hero-copy">
+        <p class="hero-lede">Chúng tôi dựng nhà để ở — <em>không phải để chụp ảnh.</em></p>
+        <ul class="hero-tags mono" aria-label="Lĩnh vực">
+          <li>Nhà ở</li><li>Nội thất</li><li>Cải tạo</li><li>Thương mại</li>
+        </ul>
+        <div class="hero-ctas">
+          <a class="btn btn-accent" href="#lien-he" data-magnetic="0.3"><span>Bắt đầu dự án</span><span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn" href="#du-an" data-magnetic="0.3"><span>Xem công trình</span><span class="arr" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="iso" aria-hidden="true"><div class="iso-world"></div></div>
+    </div>
+    <div class="hero-scroll mono" aria-hidden="true"><span>Cuộn</span><span class="hs-line"></span></div>
+    <h1 class="hero-title" id="hero-title"><span class="sr-only">KHỐI — studio kiến trúc và nội thất tại Sài Gòn</span><span class="hero-word" data-fit aria-hidden="true">KHỐI</span></h1>
+  </section>
+
+  <!-- 02 MANIFESTO -->
+  <section class="manifesto" id="tuyen-ngon" aria-labelledby="mani-t">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head mono"><span class="n">(02)</span><h2 class="t" id="mani-t">Tuyên ngôn</h2><span class="x">Viết lại lần cuối: 2024</span></div>
+      <div class="mani-grid">
+        <div class="mani-aside">
+          <span class="mani-mark" aria-hidden="true"></span>
+          <p class="mono muted">Năm câu chúng tôi dán trên tường studio.</p>
+        </div>
+        <p class="mani-text">Chúng tôi không trang trí. Chúng tôi dựng <em>khối.</em> Mỗi bức tường phải có lý do để đứng đó, mỗi ô cửa phải biết mình đón nắng hướng nào. Ánh sáng là vật liệu đầu tiên, gió là thứ hai — bê tông chỉ xếp thứ ba. Con người là đơn vị đo duy nhất. <em>Ít hơn, nhưng đúng hơn.</em></p>
+        <div class="mani-sign mono muted"><span>— Trương Hoài Nam &amp; Lý Minh Thư</span><span>Đồng sáng lập</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 WORK -->
+  <section class="work dark" id="du-an" aria-labelledby="work-t">
+    <div class="work-pin">
+      <div class="grid-lines" aria-hidden="true"></div>
+      <div class="work-head mono"><span>(03) — Dự án chọn lọc</span><span class="work-count" aria-hidden="true"><b data-work-idx>01</b> / 06</span></div>
+      <div class="work-prog" aria-hidden="true"><i></i></div>
+      <ol class="work-track">
+        <li class="work-intro">
+          <h2 class="disp work-h" id="work-t">Công trình<br>đã <em>dựng</em></h2>
+          <p class="work-sub">148 công trình sau 12 năm. Đây là sáu nơi chúng tôi vẫn hay ghé lại — để xem nắng chiều có rọi đúng chỗ đã vẽ không.</p>
+          <p class="mono muted">Cuộn để xem tiếp →</p>
+        </li>
+
+        <li class="card" data-cursor="XEM">
+          <div class="card-top mono"><span><b>P—01</b></span><span>Nhà ở · 2025</span></div>
+          <div class="card-art">
+            <svg class="art" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><g class="l">
+              <path pathLength="1" d="M16 262H384"/>
+              <path class="w" pathLength="1" d="M56 70H344"/>
+              <path pathLength="1" d="M84 70V262M316 70V262"/>
+              <path pathLength="1" d="M84 134H316M84 198H316"/>
+              <path pathLength="1" d="M104 86H186V122H104Z"/>
+              <path pathLength="1" d="M104 150H186V186H104Z"/>
+              <path class="t" pathLength="1" d="M214 84V190M234 84V190M254 84V190M274 84V190M294 84V190M214 84H294M214 105H294M214 126H294M214 147H294M214 168H294M214 190H294"/>
+              <path pathLength="1" d="M104 214H196V262"/>
+              <path class="a" pathLength="1" d="M236 210H280V262H236Z"/>
+              <path pathLength="1" d="M354 262V236"/>
+              <circle pathLength="1" cx="354" cy="210" r="26"/>
+              <path class="a" pathLength="1" d="M84 282H316M84 276V288M316 276V288"/>
+            </g><rect class="af" x="140" y="96" width="10" height="10"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Nhà Gạch Thảo Điền</h3>
+            <dl class="card-meta mono">
+              <div><dt>Địa điểm</dt><dd>Thảo Điền, TP.HCM</dd></div>
+              <div><dt>Diện tích</dt><dd>320 m²</dd></div>
+              <div><dt>Hạng mục</dt><dd>Kiến trúc + nội thất</dd></div>
+              <div><dt>Hoàn thiện</dt><dd>03/2025</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="card" data-cursor="XEM">
+          <div class="card-top mono"><span><b>P—02</b></span><span>Cải tạo · 2024</span></div>
+          <div class="card-art">
+            <svg class="art" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><g class="l">
+              <path pathLength="1" d="M16 262H384"/>
+              <path class="t" pathLength="1" d="M40 262V110H150M250 140H362V262"/>
+              <path class="w" pathLength="1" d="M150 262V40M250 262V40"/>
+              <path pathLength="1" d="M140 40H178M222 40H260"/>
+              <path class="a" pathLength="1" d="M178 40L200 22L222 40"/>
+              <path pathLength="1" d="M150 118H250M150 190H250"/>
+              <path pathLength="1" d="M162 262V250H174V238H186V226H198V214H210V202H222V190"/>
+              <path pathLength="1" d="M238 190V178H226V166H214V154H202V142H190V130H178V118"/>
+              <path pathLength="1" d="M232 40V32H244V40"/>
+              <circle class="a" pathLength="1" cx="238" cy="24" r="8"/>
+              <path class="a" pathLength="1" d="M150 282H250M150 276V288M250 276V288"/>
+            </g><path class="ray" d="M190 46L172 110M200 46V110M210 46L228 110"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Ống 4×20</h3>
+            <dl class="card-meta mono">
+              <div><dt>Địa điểm</dt><dd>Quận 3, TP.HCM</dd></div>
+              <div><dt>Diện tích</dt><dd>240 m²</dd></div>
+              <div><dt>Hạng mục</dt><dd>Cải tạo nhà phố</dd></div>
+              <div><dt>Hoàn thiện</dt><dd>10/2024</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="card" data-cursor="XEM">
+          <div class="card-top mono"><span><b>P—03</b></span><span>Thương mại · 2024</span></div>
+          <div class="card-art">
+            <svg class="art" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><g class="l">
+              <path class="w" pathLength="1" d="M60 46H340V254H232M188 254H60V46"/>
+              <path pathLength="1" d="M232 254V214"/>
+              <path class="t" pathLength="1" d="M232 214A40 40 0 0 0 192 254"/>
+              <path class="a" pathLength="1" d="M88 74H220V104H118V196H88Z"/>
+              <path pathLength="1" d="M314 70H330V232H314Z"/>
+              <circle pathLength="1" cx="270" cy="100" r="16"/>
+              <circle pathLength="1" cx="270" cy="168" r="16"/>
+              <circle pathLength="1" cx="176" cy="160" r="14"/>
+              <circle class="t" pathLength="1" cx="246" cy="100" r="5"/>
+              <circle class="t" pathLength="1" cx="294" cy="100" r="5"/>
+              <circle class="t" pathLength="1" cx="246" cy="168" r="5"/>
+              <circle class="t" pathLength="1" cx="294" cy="168" r="5"/>
+              <path pathLength="1" d="M100 212H134V240H100Z"/>
+              <circle class="a" pathLength="1" cx="117" cy="226" r="7"/>
+            </g><rect class="af" x="150" y="84" width="10" height="10"/></svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Rang Xay Bàn Cờ</h3>
+            <dl class="card-meta mono">
+              <div><dt>Địa điểm</dt><dd>Bàn Cờ, Quận 3</dd></div>
+              <div><dt>Diện tích</dt><dd>180 m²</dd></div>
+              <div><dt>Hạng mục</dt><dd>Không gian F&amp;B</dd></div>
+              <div><dt>Khai trương</dt><dd>06/2024</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="card" data-cursor="XEM">
+          <div class="card-top mono"><span><b>P—04</b></span><span>Nghỉ dưỡng · 2023</span></div>
+          <div class="card-art">
+            <svg class="art" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><g class="l">
+              <path pathLength="1" d="M10 252C80 240 140 214 200 206S330 184 390 170"/>
+              <path pathLength="1" d="M140 212H300"/>
+              <path pathLength="1" d="M150 212V226M182 212V218"/>
+              <path pathLength="1" d="M156 212V148M284 212V148"/>
+              <path class="w" pathLength="1" d="M136 156L220 96L304 156"/>
+              <path class="a" pathLength="1" d="M188 164H252V212H188Z"/>
+              <path pathLength="1" d="M220 164V212"/>
+              <path pathLength="1" d="M258 123V100H272V133"/>
+              <path pathLength="1" d="M54 242L76 170L98 236Z"/>
+              <path pathLength="1" d="M332 182L352 116L372 178Z"/>
+              <circle class="a" pathLength="1" cx="96" cy="72" r="18"/>
+            </g></svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Villa Đồi Thông</h3>
+            <dl class="card-meta mono">
+              <div><dt>Địa điểm</dt><dd>Đà Lạt, Lâm Đồng</dd></div>
+              <div><dt>Diện tích</dt><dd>410 m²</dd></div>
+              <div><dt>Hạng mục</dt><dd>Kiến trúc nghỉ dưỡng</dd></div>
+              <div><dt>Hoàn thiện</dt><dd>12/2023</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="card" data-cursor="XEM">
+          <div class="card-top mono"><span><b>P—05</b></span><span>Nội thất · 2023</span></div>
+          <div class="card-art">
+            <svg class="art" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><g class="l">
+              <path pathLength="1" d="M60 210L200 140L340 210L200 280Z"/>
+              <path pathLength="1" d="M60 210V100L200 30V140"/>
+              <path pathLength="1" d="M200 30L340 100V210"/>
+              <path class="a" pathLength="1" d="M238 72L300 103V158L238 127Z"/>
+              <path pathLength="1" d="M269 87V142"/>
+              <path class="t" pathLength="1" d="M80 140L120 120M90 170L150 140M120 110L170 85M70 190L100 175"/>
+              <path pathLength="1" d="M96 214L156 184L196 204L136 234Z"/>
+              <path pathLength="1" d="M96 214V228L136 248V234M136 248L196 218V204"/>
+              <ellipse pathLength="1" cx="250" cy="226" rx="34" ry="17"/>
+              <path class="a" pathLength="1" d="M300 196V112Q300 82 270 82"/>
+              <path class="a" pathLength="1" d="M260 82H280"/>
+            </g></svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Căn hộ Bê Tông Trần</h3>
+            <dl class="card-meta mono">
+              <div><dt>Địa điểm</dt><dd>Bình Thạnh, TP.HCM</dd></div>
+              <div><dt>Diện tích</dt><dd>96 m²</dd></div>
+              <div><dt>Hạng mục</dt><dd>Nội thất trọn gói</dd></div>
+              <div><dt>Bàn giao</dt><dd>08/2023</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="card" data-cursor="XEM">
+          <div class="card-top mono"><span><b>P—06</b></span><span>Lưu trú · 2022</span></div>
+          <div class="card-art">
+            <svg class="art" viewBox="0 0 400 300" aria-hidden="true" focusable="false"><g class="l">
+              <path pathLength="1" d="M16 210H384"/>
+              <path pathLength="1" d="M40 210V164L70 140L100 164V210"/>
+              <path pathLength="1" d="M120 210V156L150 132L180 156V210"/>
+              <path pathLength="1" d="M200 210V164L230 140L260 164V210"/>
+              <path pathLength="1" d="M280 210V170L310 146L340 170V210"/>
+              <path class="a" pathLength="1" d="M140 210V184H160V210"/>
+              <path pathLength="1" d="M60 180H80V196H60ZM220 180H240V196H220ZM300 184H320V198H300Z"/>
+              <circle class="a" pathLength="1" cx="330" cy="70" r="22"/>
+              <path pathLength="1" d="M16 240Q41 230 66 240T116 240T166 240T216 240T266 240T316 240T366 240"/>
+              <path class="t" pathLength="1" d="M40 262Q65 252 90 262T140 262T190 262T240 262T290 262T340 262"/>
+            </g></svg>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Cát Homestay</h3>
+            <dl class="card-meta mono">
+              <div><dt>Địa điểm</dt><dd>An Bàng, Hội An</dd></div>
+              <div><dt>Diện tích</dt><dd>520 m²</dd></div>
+              <div><dt>Hạng mục</dt><dd>Kiến trúc + cảnh quan</dd></div>
+              <div><dt>Hoàn thiện</dt><dd>04/2022</dd></div>
+            </dl>
+          </div>
+        </li>
+
+        <li class="card card-end" data-cursor="BẮT ĐẦU">
+          <a href="#lien-he">
+            <span class="mono">P—07 · Đang chờ khu đất</span>
+            <span class="disp">Tiếp theo là nhà bạn?</span>
+            <span class="go mono"><span>Gửi brief cho chúng tôi</span><span aria-hidden="true">→</span></span>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 04 SERVICES -->
+  <section class="services" id="dich-vu" aria-labelledby="svc-t">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head mono"><span class="n">(04)</span><span class="t">Dịch vụ</span><span class="x">Bốn việc. Làm tới nơi.</span></div>
+      <div class="svc-intro">
+        <h2 class="disp h2 rv" id="svc-t">Việc chúng tôi <em>làm</em></h2>
+        <p class="rv">Không nhận mọi thứ. Chỉ nhận những gì đủ thời gian để làm cho đúng — từ khảo sát khu đất đến ngày bàn giao chìa khoá.</p>
+      </div>
+      <ul class="svc-list">
+        <li class="svc">
+          <h3 class="svc-h"><button class="svc-btn" type="button" aria-expanded="false" aria-controls="svc-p1" id="svc-b1"><span class="svc-num mono">01</span><span class="svc-name">Kiến trúc nhà ở</span><span class="svc-tag mono">Nhà phố · Biệt thự · Nhà vườn</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="svc-p1" role="region" aria-labelledby="svc-b1"><div><div class="svc-panel-in">
+            <p class="svc-desc">Từ khảo sát khu đất đến hồ sơ xin phép và giám sát tác giả. Nhà được thiết kế quanh nắng, gió và nếp sinh hoạt thật của gia đình bạn.</p>
+            <ul class="svc-deliver mono">
+              <li>Khảo sát &amp; phân tích vi khí hậu</li>
+              <li>Phương án khối &amp; mặt bằng</li>
+              <li>Hồ sơ xin phép xây dựng</li>
+              <li>Hồ sơ kỹ thuật thi công</li>
+              <li>Giám sát tác giả</li>
+            </ul>
+            <div class="svc-meta mono"><div>Phí thiết kế<strong>Từ 350.000đ/m²</strong></div><div>Thời gian<strong>8–14 tuần</strong></div><a class="btn" href="#lien-he"><span>Đặt lịch tư vấn</span><span class="arr" aria-hidden="true">→</span></a></div>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3 class="svc-h"><button class="svc-btn" type="button" aria-expanded="false" aria-controls="svc-p2" id="svc-b2"><span class="svc-num mono">02</span><span class="svc-name">Thiết kế nội thất</span><span class="svc-tag mono">Căn hộ · Nhà ở · Penthouse</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="svc-p2" role="region" aria-labelledby="svc-b2"><div><div class="svc-panel-in">
+            <p class="svc-desc">Vật liệu thật, chi tiết gọn, đồ rời chọn đúng chỗ. Không có món nào nằm đó chỉ để lấp chỗ trống.</p>
+            <ul class="svc-deliver mono">
+              <li>Concept &amp; bảng vật liệu</li>
+              <li>Phối cảnh 3D</li>
+              <li>Bản vẽ đồ gỗ đặt riêng</li>
+              <li>Chọn đèn &amp; đồ rời</li>
+              <li>Bàn giao chìa khoá</li>
+            </ul>
+            <div class="svc-meta mono"><div>Phí thiết kế<strong>Từ 280.000đ/m²</strong></div><div>Thời gian<strong>6–10 tuần</strong></div><a class="btn" href="#lien-he"><span>Đặt lịch tư vấn</span><span class="arr" aria-hidden="true">→</span></a></div>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3 class="svc-h"><button class="svc-btn" type="button" aria-expanded="false" aria-controls="svc-p3" id="svc-b3"><span class="svc-num mono">03</span><span class="svc-name">Cải tạo</span><span class="svc-tag mono">Nhà ống · Chung cư cũ</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="svc-p3" role="region" aria-labelledby="svc-b3"><div><div class="svc-panel-in">
+            <p class="svc-desc">Giữ khung, đổi hồn, thêm ánh sáng. Chúng tôi mở giếng trời, nắn lại luồng gió và cứu những ngôi nhà tưởng chỉ còn cách đập đi.</p>
+            <ul class="svc-deliver mono">
+              <li>Đánh giá kết cấu hiện trạng</li>
+              <li>Phương án giếng trời &amp; thông gió</li>
+              <li>Lộ trình thi công theo giai đoạn</li>
+              <li>Kiểm soát chi phí phát sinh</li>
+            </ul>
+            <div class="svc-meta mono"><div>Phí thiết kế<strong>Từ 300.000đ/m²</strong></div><div>Thời gian<strong>4–8 tuần</strong></div><a class="btn" href="#lien-he"><span>Đặt lịch tư vấn</span><span class="arr" aria-hidden="true">→</span></a></div>
+          </div></div></div>
+        </li>
+        <li class="svc">
+          <h3 class="svc-h"><button class="svc-btn" type="button" aria-expanded="false" aria-controls="svc-p4" id="svc-b4"><span class="svc-num mono">04</span><span class="svc-name">Không gian thương mại</span><span class="svc-tag mono">F&amp;B · Bán lẻ · Văn phòng</span><span class="svc-plus" aria-hidden="true"></span></button></h3>
+          <div class="svc-panel" id="svc-p4" role="region" aria-labelledby="svc-b4"><div><div class="svc-panel-in">
+            <p class="svc-desc">Thiết kế để bán được hàng — và để khách muốn quay lại. Dòng khách, ánh sáng, âm thanh, cả chỗ đặt ổ cắm cho người ngồi làm việc.</p>
+            <ul class="svc-deliver mono">
+              <li>Chiến lược trải nghiệm &amp; dòng khách</li>
+              <li>Nhận diện không gian</li>
+              <li>Hồ sơ thi công &amp; MEP</li>
+              <li>Đồng hành đến ngày khai trương</li>
+            </ul>
+            <div class="svc-meta mono"><div>Phí thiết kế<strong>Theo phạm vi</strong></div><div>Thời gian<strong>6–12 tuần</strong></div><a class="btn" href="#lien-he"><span>Đặt lịch tư vấn</span><span class="arr" aria-hidden="true">→</span></a></div>
+          </div></div></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 05 PROCESS -->
+  <section class="process dark" id="quy-trinh" aria-labelledby="proc-t">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head mono"><span class="n">(05)</span><h2 class="t" id="proc-t">Quy trình</h2><span class="x">Bốn bước — một bản vẽ</span></div>
+      <div class="proc-grid">
+        <div class="proc-visual">
+          <div class="plan-frame">
+            <svg class="plan" viewBox="0 0 600 520" role="img" aria-labelledby="plan-title">
+              <title id="plan-title">Bản vẽ mặt bằng tầng trệt một ngôi nhà, hiện dần theo từng bước của quy trình</title>
+              <g class="pg">
+                <path class="l t" pathLength="1" d="M80 34V490M300 34V490M520 34V490"/>
+                <path class="l t" pathLength="1" d="M34 80H566M34 270H566M34 440H566"/>
+                <circle class="l t bub" pathLength="1" cx="80" cy="20" r="12"/>
+                <circle class="l t bub" pathLength="1" cx="300" cy="20" r="12"/>
+                <circle class="l t bub" pathLength="1" cx="520" cy="20" r="12"/>
+                <circle class="l t bub" pathLength="1" cx="20" cy="80" r="12"/>
+                <circle class="l t bub" pathLength="1" cx="20" cy="270" r="12"/>
+                <circle class="l t bub" pathLength="1" cx="20" cy="440" r="12"/>
+                <text x="80" y="24" text-anchor="middle">A</text>
+                <text x="300" y="24" text-anchor="middle">B</text>
+                <text x="520" y="24" text-anchor="middle">C</text>
+                <text x="20" y="84" text-anchor="middle">1</text>
+                <text x="20" y="274" text-anchor="middle">2</text>
+                <text x="20" y="444" text-anchor="middle">3</text>
+              </g>
+              <g class="pg">
+                <path class="l w" pathLength="1" d="M330 440H520V80H80V440H290"/>
+                <path class="l w" pathLength="1" d="M300 80V200M300 240V440"/>
+                <path class="l w" pathLength="1" d="M80 270H190M230 270H300"/>
+                <path class="l w" pathLength="1" d="M300 300H400M440 300H520"/>
+                <path class="l" pathLength="1" d="M74 74h12v12h-12zM294 74h12v12h-12zM514 74h12v12h-12zM74 264h12v12h-12zM294 264h12v12h-12zM514 264h12v12h-12zM74 434h12v12h-12zM294 434h12v12h-12zM514 434h12v12h-12z"/>
+              </g>
+              <g class="pg">
+                <path class="l" pathLength="1" d="M112 104H222V234H112Z"/>
+                <path class="l" pathLength="1" d="M122 114H162V136H122ZM172 114H212V136H172ZM112 176H222"/>
+                <path class="l" pathLength="1" d="M300 240H260"/>
+                <path class="l t" pathLength="1" d="M260 240A40 40 0 0 1 300 200"/>
+                <path class="l t" pathLength="1" d="M330 130H440V222H330Z"/>
+                <circle class="l" pathLength="1" cx="385" cy="176" r="26"/>
+                <path class="l" pathLength="1" d="M330 236H480V266H330ZM342 236V254H468V236"/>
+                <path class="l" pathLength="1" d="M100 290H280V314H124V420H100Z"/>
+                <path class="l" pathLength="1" d="M170 350H262V392H170Z"/>
+                <circle class="l" pathLength="1" cx="210" cy="302" r="7"/>
+                <path class="l" pathLength="1" d="M230 270V310"/>
+                <path class="l t" pathLength="1" d="M230 310A40 40 0 0 1 190 270"/>
+                <path class="l" pathLength="1" d="M330 318H420V422H330ZM330 339H420M330 360H420M330 381H420M330 402H420"/>
+                <path class="l a" pathLength="1" d="M375 412V330M368 340L375 330L382 340"/>
+                <ellipse class="l" pathLength="1" cx="486" cy="352" rx="14" ry="18"/>
+                <path class="l" pathLength="1" d="M440 300V340"/>
+                <path class="l t" pathLength="1" d="M440 340A40 40 0 0 1 400 300"/>
+                <path class="l" pathLength="1" d="M330 440V400"/>
+                <path class="l t" pathLength="1" d="M330 400A40 40 0 0 0 290 440"/>
+                <text x="112" y="256">P. NGỦ · 18 m²</text>
+                <text x="318" y="112">P. KHÁCH · 32 m²</text>
+                <text x="136" y="430">BẾP · 21 m²</text>
+                <text x="460" y="412">WC</text>
+              </g>
+              <g class="pg">
+                <path class="l a" pathLength="1" d="M80 54H520M80 46V62M300 46V62M520 46V62"/>
+                <text class="acc" x="190" y="48" text-anchor="middle">6.600</text>
+                <text class="acc" x="410" y="48" text-anchor="middle">6.600</text>
+                <path class="l a" pathLength="1" d="M54 80V440M46 80H62M46 270H62M46 440H62"/>
+                <text class="acc" x="48" y="175" text-anchor="middle" transform="rotate(-90 48 175)">5.700</text>
+                <text class="acc" x="48" y="355" text-anchor="middle" transform="rotate(-90 48 355)">5.100</text>
+                <path class="l a" pathLength="1" d="M456 96H510V150H456ZM456 150L510 96M456 123L483 96M483 150L510 123"/>
+                <text class="acc" x="452" y="168">GIẾNG TRỜI</text>
+                <circle class="l a" pathLength="1" cx="560" cy="490" r="14"/>
+                <path class="l a" pathLength="1" d="M560 502V478M554 486L560 476L566 486"/>
+                <text class="acc" x="560" y="470" text-anchor="middle">N</text>
+                <path class="l a" pathLength="1" d="M310 508V456M302 466L310 456L318 466"/>
+                <text class="acc" x="322" y="500">LỐI VÀO</text>
+              </g>
+            </svg>
+          </div>
+          <div class="plan-cap mono"><span>Bản vẽ KH-05 · Mặt bằng tầng trệt</span><span aria-hidden="true">Bước <b data-plan-step>01</b>/04</span></div>
+        </div>
+        <ol class="proc-steps">
+          <li class="step">
+            <span class="step-n" aria-hidden="true">01</span>
+            <h3>Lắng nghe</h3>
+            <p>Khảo sát khu đất, đo nắng, đo gió, rồi ngồi với gia chủ thật lâu. Chúng tôi hỏi nhiều — có khi hơi nhiều.</p>
+            <span class="mono dur">2 tuần · Khảo sát &amp; brief</span>
+          </li>
+          <li class="step">
+            <span class="step-n" aria-hidden="true">02</span>
+            <h3>Phác khối</h3>
+            <p>Ba phương án khối, mô hình giấy, mặt bằng sơ bộ. Chọn một, rồi gọt cho tới khi không còn gì để bỏ.</p>
+            <span class="mono dur">3–4 tuần · Ý tưởng</span>
+          </li>
+          <li class="step">
+            <span class="step-n" aria-hidden="true">03</span>
+            <h3>Triển khai</h3>
+            <p>Hồ sơ kỹ thuật, chi tiết cấu tạo, bảng vật liệu, dự toán. Mỗi con số đều có lý do, mỗi con vít đều có chỗ.</p>
+            <span class="mono dur">6–8 tuần · Hồ sơ kỹ thuật</span>
+          </li>
+          <li class="step">
+            <span class="step-n" aria-hidden="true">04</span>
+            <h3>Dựng</h3>
+            <p>Giám sát tác giả tại công trường mỗi tuần. Chỉ bàn giao khi mọi khe nối đều thẳng và mọi cánh cửa đều đóng êm.</p>
+            <span class="mono dur">Theo tiến độ · Thi công</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 STUDIO -->
+  <section class="studio" id="studio" aria-labelledby="studio-t">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head mono"><span class="n">(06)</span><span class="t">Studio</span><span class="x">14 người · 1 xưởng mô hình</span></div>
+      <div class="studio-lead">
+        <h2 class="disp rv" id="studio-t">12 năm. Một nguyên tắc: <em>đúng</em> trước, đẹp sau.</h2>
+        <p class="rv">Một xưởng nhỏ trên tầng ba đường Võ Văn Tần — kiến trúc sư, hoạ viên, thợ mộc mô hình và một chiếc máy pha cà phê làm việc không nghỉ.</p>
+      </div>
+      <div class="stats">
+        <div class="stat"><p class="stat-num"><span data-count="12">12</span></p><span class="mono muted">Năm hành nghề</span></div>
+        <div class="stat"><p class="stat-num"><span data-count="148">148</span></p><span class="mono muted">Công trình hoàn thiện</span></div>
+        <div class="stat"><p class="stat-num"><span data-count="37400">37.400</span><sup>m²</sup></p><span class="mono muted">Sàn đã dựng</span></div>
+        <div class="stat"><p class="stat-num"><span data-count="9">9</span></p><span class="mono muted">Giải thưởng &amp; đề cử</span></div>
+      </div>
+
+      <div class="team-head mono"><h3>Người đứng sau bản vẽ</h3><span class="muted">04 / 14</span></div>
+      <ul class="team">
+        <li class="person rv">
+          <div class="portrait" aria-hidden="true"><span class="ini">HN</span><svg viewBox="0 0 120 130"><path class="l" d="M14 130C14 92 34 78 60 78S106 92 106 130Z"/><circle class="l" cx="60" cy="44" r="24"/></svg></div>
+          <h4>Trương Hoài Nam</h4><p class="mono">KTS chủ trì · Đồng sáng lập</p>
+        </li>
+        <li class="person rv">
+          <div class="portrait" aria-hidden="true"><span class="ini">MT</span><svg viewBox="0 0 120 130"><path class="l" d="M18 130C18 94 36 80 60 80S102 94 102 130Z"/><path class="l" d="M34 52C34 26 46 18 60 18S86 26 86 52V74H34Z"/><circle class="l" cx="60" cy="46" r="21"/></svg></div>
+          <h4>Lý Minh Thư</h4><p class="mono">Giám đốc nội thất · Đồng sáng lập</p>
+        </li>
+        <li class="person rv">
+          <div class="portrait" aria-hidden="true"><span class="ini">GB</span><svg viewBox="0 0 120 130"><path class="l" d="M12 130C12 90 32 76 60 76S108 90 108 130Z"/><circle class="l" cx="60" cy="42" r="23"/><path class="l" d="M40 40H80"/></svg></div>
+          <h4>Đỗ Gia Bảo</h4><p class="mono">KTS dự án</p>
+        </li>
+        <li class="person rv">
+          <div class="portrait" aria-hidden="true"><span class="ini">HD</span><svg viewBox="0 0 120 130"><path class="l" d="M16 130C16 92 36 78 60 78S104 92 104 130Z"/><circle class="l" cx="60" cy="44" r="22"/><path class="l" d="M38 34C40 18 80 18 82 34Z"/></svg></div>
+          <h4>Nguyễn Hạnh Dung</h4><p class="mono">Quản lý thi công</p>
+        </li>
+      </ul>
+
+      <div class="awards">
+        <div class="team-head mono"><h3>Giải thưởng</h3><span class="muted">Chọn lọc</span></div>
+        <ul>
+          <li class="aw-row"><span class="aw-y mono">2025</span><span class="aw-n">Công trình nhà ở của năm</span><span class="aw-o mono">Tạp chí Không Gian Việt</span><span class="aw-p mono">P—01</span></li>
+          <li class="aw-row"><span class="aw-y mono">2024</span><span class="aw-n">Giải Nhì — Thiết kế cải tạo</span><span class="aw-o mono">Tuần lễ Kiến trúc Sài Gòn</span><span class="aw-p mono">P—02</span></li>
+          <li class="aw-row"><span class="aw-y mono">2024</span><span class="aw-n">Top 10 không gian F&amp;B</span><span class="aw-o mono">Saigon Design Review</span><span class="aw-p mono">P—03</span></li>
+          <li class="aw-row"><span class="aw-y mono">2023</span><span class="aw-n">Đề cử — Nội thất nhà ở</span><span class="aw-o mono">Asia Interior Index</span><span class="aw-p mono">P—05</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="mq-row r1" data-dir="1"><div class="mq-inner"><div class="mq-set"><span>Kiến trúc</span><span class="sq"></span><span class="o">Nội thất</span><span class="sq"></span><span>Cải tạo</span><span class="sq"></span><span class="o">Thương mại</span><span class="sq"></span></div></div></div>
+    <div class="mq-row r2" data-dir="-1"><div class="mq-inner"><div class="mq-set"><span>Ánh sáng</span><span class="sq"></span><span class="o">Bê tông</span><span class="sq"></span><span>Gió</span><span class="sq"></span><span class="o">Gỗ</span><span class="sq"></span><span>Tỉ lệ</span><span class="sq"></span></div></div></div>
+  </div>
+
+  <!-- 07 TESTIMONIALS -->
+  <section class="voices" id="loi-khen" aria-labelledby="voices-t">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head mono"><span class="n">(07)</span><span class="t">Khách hàng nói</span><span class="x">Không chỉnh sửa</span></div>
+      <h2 class="disp voices-h rv" id="voices-t">Sống thử <em>rồi</em> mới nói</h2>
+      <figure class="voice rv">
+        <div class="voice-n mono"><span class="q" aria-hidden="true">“</span><span>01 / 03</span></div>
+        <blockquote><p>Họ hỏi nhà tôi mấy giờ thức dậy, trước cả khi hỏi cần mấy phòng ngủ. Giờ thì nắng sáng rọi đúng chỗ bàn ăn, không lệch một gang tay.</p></blockquote>
+        <figcaption class="mono"><strong>Chị Võ Ngọc Hân</strong><span>Chủ nhà · Ống 4×20, Quận 3</span></figcaption>
+      </figure>
+      <figure class="voice rv">
+        <div class="voice-n mono"><span class="q" aria-hidden="true">“</span><span>02 / 03</span></div>
+        <blockquote><p>Ngân sách chặt, mặt bằng xấu, thời gian gấp. KHỐI không than câu nào — chỉ gửi lại ba phương án và một bảng dự toán rõ tới từng con vít.</p></blockquote>
+        <figcaption class="mono"><strong>Anh Lê Quang Vinh</strong><span>Đồng sáng lập · Rang Xay Bàn Cờ</span></figcaption>
+      </figure>
+      <figure class="voice rv">
+        <div class="voice-n mono"><span class="q" aria-hidden="true">“</span><span>03 / 03</span></div>
+        <blockquote><p>Ba mùa đông rồi, nhà vẫn ấm những đêm mười độ mà không cần lò sưởi. Bản vẽ đẹp thì nhiều, nhưng lời hứa đó thì họ giữ được.</p></blockquote>
+        <figcaption class="mono"><strong>Cô Phạm Thu Hà</strong><span>Chủ nhà · Villa Đồi Thông, Đà Lạt</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 08 CONTACT -->
+  <section class="contact" id="lien-he" aria-labelledby="cta-t">
+    <div class="grid-lines" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="sec-head mono"><span class="n">(08)</span><span class="t">Liên hệ</span><span class="x">Phản hồi trong 48 giờ làm việc</span></div>
+      <div class="cta-wrap">
+        <h2 class="cta-big" id="cta-t" data-fit><span class="line"><span>Hãy xây</span></span><span class="line"><span><em>cùng</em> nhau</span></span></h2>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="intro rv">Kể cho chúng tôi nghe về khu đất, căn nhà, hay chỉ là một ý tưởng còn dang dở. Buổi gặp đầu tiên luôn miễn phí.</p>
+          <dl class="rv">
+            <div><dt class="mono">Email</dt><dd><a href="mailto:xinchao@khoistudio.vn">xinchao@khoistudio.vn</a></dd></div>
+            <div><dt class="mono">Điện thoại</dt><dd><a href="tel:+842839301488">028 3930 1488</a></dd></div>
+            <div><dt class="mono">Studio</dt><dd>Tầng 3, 128 Võ Văn Tần, Quận 3, TP.HCM</dd></div>
+            <div><dt class="mono">Giờ mở cửa</dt><dd>Thứ Hai – Thứ Bảy, 8:30 – 18:00</dd></div>
+          </dl>
+        </div>
+        <div class="brief-box dark rv">
+          <div class="brief-head mono"><span>Brief dự án</span><span class="muted">Mẫu KH-01</span></div>
+          <form id="brief-form" aria-label="Gửi brief dự án">
+            <div class="row2">
+              <div class="field"><label class="mono" for="f-name">Họ và tên *</label><input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Nguyễn Văn A"></div>
+              <div class="field"><label class="mono" for="f-email">Email *</label><input id="f-email" name="email" type="email" autocomplete="email" required placeholder="ban@email.com"></div>
+            </div>
+            <div class="field"><label class="mono" for="f-type">Loại dự án *</label>
+              <div class="select"><select id="f-type" name="type" required>
+                <option value="" disabled selected>Chọn một hạng mục</option>
+                <option>Kiến trúc nhà ở</option>
+                <option>Thiết kế nội thất</option>
+                <option>Cải tạo</option>
+                <option>Không gian thương mại</option>
+                <option>Chưa chắc — cần tư vấn</option>
+              </select></div>
+            </div>
+            <fieldset class="chips">
+              <legend class="mono">Ngân sách dự kiến *</legend>
+              <div class="chip-row">
+                <label class="chip"><input type="radio" name="budget" value="duoi-500tr" required><span>Dưới 500 triệu</span></label>
+                <label class="chip"><input type="radio" name="budget" value="500tr-1.5ty"><span>500 triệu – 1,5 tỷ</span></label>
+                <label class="chip"><input type="radio" name="budget" value="1.5-5ty"><span>1,5 – 5 tỷ</span></label>
+                <label class="chip"><input type="radio" name="budget" value="tren-5ty"><span>Trên 5 tỷ</span></label>
+              </div>
+            </fieldset>
+            <div class="field"><label class="mono" for="f-msg">Kể ngắn về dự án *</label><textarea id="f-msg" name="message" rows="4" required minlength="20" placeholder="Khu đất ở đâu, rộng bao nhiêu, ai sẽ sống trong đó, bạn mong điều gì…"></textarea></div>
+            <div class="form-foot">
+              <p class="mono">Thông tin chỉ dùng để liên hệ về dự án của bạn.</p>
+              <button class="btn btn-accent" type="submit" data-magnetic="0.25"><span>Gửi brief</span><span class="arr" aria-hidden="true">→</span></button>
+            </div>
+          </form>
+          <div class="form-success" role="status" aria-live="polite" tabindex="-1" hidden>
+            <span class="ok-mark" aria-hidden="true"></span>
+            <p class="disp">Đã nhận.</p>
+            <p>Cảm ơn <span class="sent-name">bạn</span>. KTS phụ trách sẽ gọi lại trong 48 giờ làm việc — thường là sớm hơn.</p>
+            <button class="btn form-again" type="button"><span>Gửi brief khác</span><span class="arr" aria-hidden="true">↺</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer dark">
+  <div class="grid-lines" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col"><h2 class="mono">KHỐI Studio</h2><p class="big">Kiến trúc &amp; nội thất.<br>Sài Gòn, từ 2014.</p></div>
+      <div class="foot-col mono"><h2 class="mono">Studio</h2><p>Tầng 3, 128 Võ Văn Tần<br>Quận 3, TP.HCM</p></div>
+      <div class="foot-col mono"><h2 class="mono">Liên hệ</h2><a href="mailto:xinchao@khoistudio.vn">xinchao@khoistudio.vn</a><a href="tel:+842839301488">028 3930 1488</a></div>
+      <div class="foot-col mono"><h2 class="mono">Theo dõi</h2><a href="#top" aria-label="Instagram (đang cập nhật)">Instagram</a><a href="#top" aria-label="Behance (đang cập nhật)">Behance</a><a href="#top" aria-label="LinkedIn (đang cập nhật)">LinkedIn</a></div>
+    </div>
+    <p class="foot-giant" aria-hidden="true"><span data-fit>KHỐI Studio</span></p>
+    <div class="foot-bar mono">
+      <span>© 2014–2026 KHỐI Studio. Mọi quyền được bảo lưu.</span>
+      <span>Sài Gòn <time data-clock>--:--:--</time></span>
+      <a href="#top">Lên đầu trang ↑</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const doc = document;
+  const root = doc.documentElement;
+  const $ = (s, c) => (c || doc).querySelector(s);
+  const $$ = (s, c) => Array.from((c || doc).querySelectorAll(s));
+  const clamp = (v, a, b) => (v < a ? a : v > b ? b : v);
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const mm = (q) => (window.matchMedia ? window.matchMedia(q) : { matches: false });
+  const reduce = mm('(prefers-reduced-motion: reduce)').matches;
+  const fine = mm('(hover: hover) and (pointer: fine)').matches;
+  const mqMobile = mm('(max-width: 767px)');
+  const fmtNum = (() => {
+    try { const f = new Intl.NumberFormat('vi-VN'); return (n) => f.format(n); }
+    catch (e) { return (n) => String(n); }
+  })();
+
+  /* ---------- split hero letters ---------- */
+  const heroWord = $('.hero-word');
+  if (heroWord) {
+    const txt = (heroWord.textContent || '').trim().normalize('NFC');
+    heroWord.textContent = '';
+    Array.from(txt).forEach((c, i) => {
+      const outer = doc.createElement('span');
+      outer.className = 'ch';
+      const inner = doc.createElement('span');
+      inner.textContent = c;
+      inner.style.setProperty('--i', String(i));
+      outer.appendChild(inner);
+      heroWord.appendChild(outer);
+    });
+  }
+
+  /* ---------- split manifesto words ---------- */
+  const mani = $('.mani-text');
+  const words = [];
+  if (mani && !reduce && doc.createTreeWalker) {
+    const walker = doc.createTreeWalker(mani, NodeFilter.SHOW_TEXT);
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach((n) => {
+      const frag = doc.createDocumentFragment();
+      (n.nodeValue || '').split(/(\s+)/).forEach((p) => {
+        if (!p) return;
+        if (/^\s+$/.test(p)) { frag.appendChild(doc.createTextNode(p)); return; }
+        const s = doc.createElement('span');
+        s.className = 'w';
+        s.textContent = p;
+        frag.appendChild(s);
+        words.push(s);
+      });
+      if (n.parentNode) n.parentNode.replaceChild(frag, n);
+    });
+  }
+
+  /* ---------- isometric blocks ---------- */
+  const world = $('.iso-world');
+  const cubes = [];
+  if (world) {
+    const u = (n) => 'calc(var(--u) * ' + n + ')';
+    const face = (cls, w, h, tf) => {
+      const f = doc.createElement('i');
+      f.className = 'face ' + cls;
+      f.style.width = u(w);
+      f.style.height = u(h);
+      f.style.marginLeft = u(-w / 2);
+      f.style.marginTop = u(-h / 2);
+      f.style.transform = tf;
+      return f;
+    };
+    world.appendChild(face('f-plane', 10, 10, 'rotateX(90deg)'));
+    // [x, bottomY, z, w, h, d, variant]
+    const data = [
+      [0, 0, 0, 6, 1, 6, 'v-base'],
+      [-1.5, 1, -1.5, 3, 3, 3, 'v-hatch'],
+      [1.5, 1, 1, 3, 2, 3, 'v-ink'],
+      [-2.5, 1, 2.25, 1, 4, 1, 'v-win'],
+      [1.5, 3, 1.5, 2, 1, 2, 'v-win'],
+      [-1, 4, -1, 2, 2, 4, 'v-acc']
+    ];
+    data.forEach((c, i) => {
+      const [x, y0, z, w, h, d, v] = c;
+      const el = doc.createElement('div');
+      el.className = 'cube ' + v;
+      el.appendChild(face('f-front', w, h, 'translateZ(' + u(d / 2) + ')'));
+      el.appendChild(face('f-back', w, h, 'rotateY(180deg) translateZ(' + u(d / 2) + ')'));
+      el.appendChild(face('f-right', d, h, 'rotateY(90deg) translateZ(' + u(w / 2) + ')'));
+      el.appendChild(face('f-left', d, h, 'rotateY(-90deg) translateZ(' + u(w / 2) + ')'));
+      el.appendChild(face('f-top', w, d, 'rotateX(90deg) translateZ(' + u(h / 2) + ')'));
+      const base = 'translate3d(' + u(x) + ', ' + u(-(y0 + h / 2)) + ', ' + u(z) + ')';
+      el.style.transform = base;
+      world.appendChild(el);
+      cubes.push({ el, base, i });
+    });
+  }
+
+  /* ---------- marquee clones ---------- */
+  const mq = $('.marquee');
+  const rows = $$('.mq-row').map((r) => {
+    const inner = $('.mq-inner', r);
+    const set = $('.mq-set', r);
+    if (!inner || !set) return null;
+    for (let k = 0; k < 3; k++) inner.appendChild(set.cloneNode(true));
+    return { inner, set, x: 0, w: 0, dir: Number(r.getAttribute('data-dir')) || 1 };
+  }).filter(Boolean);
+
+  /* ---------- svg art stagger ---------- */
+  $$('.art').forEach((svg) => {
+    $$('[pathLength]', svg).forEach((el, j) => { el.style.animationDelay = (j * 70) + 'ms'; });
+  });
+
+  /* ---------- fit giant type ---------- */
+  const fits = $$('[data-fit]');
+  const fitAll = () => {
+    fits.forEach((el) => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      const cs = getComputedStyle(parent);
+      const target = parent.clientWidth - (parseFloat(cs.paddingLeft) || 0) - (parseFloat(cs.paddingRight) || 0);
+      if (target <= 0) return;
+      el.style.fontSize = '100px';
+      const w = el.getBoundingClientRect().width;
+      if (w > 0) el.style.fontSize = (100 * target / w * 0.995).toFixed(2) + 'px';
+    });
+  };
+
+  /* ---------- measurements ---------- */
+  const hero = $('.hero');
+  const work = $('.work');
+  const workTrack = $('.work-track');
+  const workBar = $('.work-prog i');
+  const workIdx = $('[data-work-idx]');
+  const cardsN = $$('.work-track .card:not(.card-end)').length || 1;
+  const procSteps = $('.proc-steps');
+  const steps = $$('.step');
+  const planStep = $('[data-plan-step]');
+  const planGroups = $$('.plan .pg').map((g) => ({ g, paths: $$('[pathLength]', g), on: false }));
+
+  let heroH = 0, workTop = 0, workMax = 0, workActive = false;
+  let maniTop = 0, maniH = 0, procTop = 0, procH = 0, mqTop = 0, mqH = 0;
+  let lastMani = -1, lastProc = -1, lastIdx = -1, lastLift = -1, lastStep = -1;
+
+  const docTop = (el) => el.getBoundingClientRect().top + window.scrollY;
+  const measure = () => {
+    const H = window.innerHeight;
+    if (hero) heroH = hero.offsetHeight;
+    if (work && workTrack) {
+      workActive = !reduce && !mqMobile.matches;
+      if (workActive) {
+        const last = workTrack.lastElementChild;
+        const pr = parseFloat(getComputedStyle(workTrack).paddingRight) || 0;
+        workMax = last ? Math.max(0, last.offsetLeft + last.offsetWidth + pr - workTrack.clientWidth) : 0;
+        const hpx = Math.round(H + workMax) + 'px';
+        if (work.style.height !== hpx) work.style.height = hpx;
+        workTop = docTop(work);
+      } else {
+        work.style.height = '';
+        workTrack.style.transform = '';
+      }
+    }
+    if (mani) { maniTop = docTop(mani); maniH = mani.offsetHeight; }
+    if (procSteps) { procTop = docTop(procSteps); procH = procSteps.offsetHeight; }
+    if (mq) { mqTop = docTop(mq); mqH = mq.offsetHeight; }
+    rows.forEach((r) => { r.w = r.set.offsetWidth; });
+    lastMani = -1; lastProc = -1; lastLift = -1;
+  };
+
+  let measurePending = false;
+  const scheduleMeasure = () => {
+    if (measurePending) return;
+    measurePending = true;
+    requestAnimationFrame(() => { measurePending = false; measure(); });
+  };
+  window.addEventListener('resize', () => { fitAll(); scheduleMeasure(); });
+  if ('ResizeObserver' in window) new ResizeObserver(scheduleMeasure).observe(doc.body);
+  if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(() => { fitAll(); measure(); });
+  fitAll();
+  measure();
+
+  /* ---------- clock (GMT+7) ---------- */
+  const clocks = $$('[data-clock]');
+  const pad = (n) => String(n).padStart(2, '0');
+  const tickClock = () => {
+    const d = new Date(Date.now() + 7 * 3600000);
+    const s = pad(d.getUTCHours()) + ':' + pad(d.getUTCMinutes()) + ':' + pad(d.getUTCSeconds());
+    clocks.forEach((el) => { el.textContent = s; });
+  };
+  if (clocks.length) { tickClock(); setInterval(tickClock, 1000); }
+
+  /* ---------- menu ---------- */
+  const menuBtn = $('.menu-btn');
+  const menu = $('#menu');
+  const menuLabel = $('.menu-btn-label');
+  let menuOpen = false;
+  const setMenu = (open, restoreFocus) => {
+    if (!menuBtn || !menu) return;
+    menuOpen = open;
+    menu.classList.toggle('is-open', open);
+    menu.setAttribute('aria-hidden', String(!open));
+    menu.toggleAttribute('inert', !open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    if (menuLabel) menuLabel.textContent = open ? 'Đóng' : 'Menu';
+    root.classList.toggle('menu-open', open);
+    $$('main, footer').forEach((el) => el.toggleAttribute('inert', open));
+    if (open) {
+      const first = $('a', menu);
+      if (first) setTimeout(() => { if (menuOpen) first.focus({ preventScroll: true }); }, 380);
+    } else if (restoreFocus) {
+      menuBtn.focus({ preventScroll: true });
+    }
+  };
+  if (menuBtn && menu) {
+    menuBtn.addEventListener('click', () => setMenu(!menuOpen, true));
+    $$('a', menu).forEach((a) => a.addEventListener('click', () => setMenu(false, false)));
+    doc.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menuOpen) setMenu(false, true); });
+  }
+
+  /* ---------- pointer + cursor ---------- */
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2, nx = 0, ny = 0, sx = 0, sy = 0;
+  let rx = mx, ry = my;
+  const dot = $('.cur-dot');
+  const ring = $('.cur-ring');
+  const ringLabel = ring ? $('span', ring) : null;
+  const cursorOn = fine && !!dot && !!ring;
+  if (fine) {
+    window.addEventListener('pointermove', (e) => {
+      if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
+      mx = e.clientX; my = e.clientY;
+      nx = (mx / window.innerWidth) * 2 - 1;
+      ny = (my / window.innerHeight) * 2 - 1;
+      root.classList.remove('cur-out');
+    }, { passive: true });
+  }
+  if (cursorOn) {
+    root.classList.add('has-cursor', 'cur-out');
+    doc.addEventListener('pointerover', (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      root.classList.toggle('cur-field', !!t.closest('input:not([type=radio]), textarea, select'));
+      const lab = t.closest('[data-cursor]');
+      const link = t.closest('a, button, label');
+      ring.classList.toggle('is-label', !!lab);
+      ring.classList.toggle('is-link', !lab && !!link);
+      if (lab && ringLabel) ringLabel.textContent = lab.getAttribute('data-cursor') || '';
+    });
+    root.addEventListener('mouseleave', () => root.classList.add('cur-out'));
+    window.addEventListener('pointerdown', () => ring.classList.add('is-down'));
+    window.addEventListener('pointerup', () => ring.classList.remove('is-down'));
+  }
+
+  /* ---------- magnetic ---------- */
+  if (fine && !reduce) {
+    $$('[data-magnetic]').forEach((el) => {
+      const s = parseFloat(el.getAttribute('data-magnetic')) || 0.3;
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        el.style.transform = 'translate3d(' + (dx * s).toFixed(1) + 'px,' + (dy * s).toFixed(1) + 'px,0)';
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  /* ---------- services accordion ---------- */
+  $$('.svc').forEach((item) => {
+    const btn = $('.svc-btn', item);
+    const panel = $('.svc-panel', item);
+    if (!btn || !panel) return;
+    panel.toggleAttribute('inert', true);
+    btn.addEventListener('click', () => {
+      const open = !item.classList.contains('is-open');
+      item.classList.toggle('is-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      panel.toggleAttribute('inert', !open);
+    });
+  });
+
+  /* ---------- reveal + count-up ---------- */
+  const countUp = (el) => {
+    const to = parseFloat(el.getAttribute('data-count')) || 0;
+    if (reduce) { el.textContent = fmtNum(to); return; }
+    const t0 = performance.now();
+    const dur = 1800;
+    const step = (now) => {
+      const t = clamp((now - t0) / dur, 0, 1);
+      const e = t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+      el.textContent = fmtNum(Math.round(to * e));
+      if (t < 1) requestAnimationFrame(step);
+    };
+    step(t0);
+  };
+  const counters = $$('[data-count]');
+  if (!reduce) counters.forEach((el) => { el.textContent = '0'; });
+  const revealEls = $$('.rv, .art, .cta-big, [data-count]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        const t = en.target;
+        t.classList.add('in');
+        if (t.hasAttribute('data-count')) countUp(t);
+        io.unobserve(t);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    revealEls.forEach((el) => io.observe(el));
+  } else {
+    revealEls.forEach((el) => {
+      el.classList.add('in');
+      if (el.hasAttribute('data-count')) countUp(el);
+    });
+  }
+
+  /* ---------- form ---------- */
+  const form = $('#brief-form');
+  const sent = $('.form-success');
+  const again = $('.form-again');
+  const sentName = $('.sent-name');
+  if (form && sent) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (typeof form.checkValidity === 'function' && !form.checkValidity()) {
+        if (typeof form.reportValidity === 'function') form.reportValidity();
+        return;
+      }
+      const raw = String(new FormData(form).get('name') || '').trim();
+      const given = raw.split(/\s+/).pop();
+      if (sentName) sentName.textContent = given || 'bạn';
+      form.hidden = true;
+      sent.hidden = false;
+      sent.focus({ preventScroll: true });
+    });
+    if (again) {
+      again.addEventListener('click', () => {
+        form.reset();
+        sent.hidden = true;
+        form.hidden = false;
+        const first = $('input', form);
+        if (first) first.focus();
+      });
+    }
+  }
+
+  /* ---------- frame loop ---------- */
+  let lastY = window.scrollY, vel = 0, lastT = performance.now();
+  const frame = (now) => {
+    const dt = Math.min(64, now - lastT) / 16.667;
+    lastT = now;
+    const y = window.scrollY;
+    const H = window.innerHeight;
+    vel = lerp(vel, y - lastY, 0.15);
+    lastY = y;
+
+    // hero: parallax + iso
+    if (!reduce && y < heroH + 50) {
+      if (heroWord) heroWord.style.transform = 'translate3d(0,' + (y * 0.2).toFixed(1) + 'px,0)';
+      if (world) {
+        sx = lerp(sx, nx, 0.06);
+        sy = lerp(sy, ny, 0.06);
+        const t = now * 0.00025;
+        const ryv = 45 + Math.sin(t) * 16 + sx * 24;
+        const rxv = -30 - sy * 8;
+        world.style.transform = 'rotateX(' + rxv.toFixed(2) + 'deg) rotateY(' + ryv.toFixed(2) + 'deg)';
+        const lift = clamp(y / (heroH || 1), 0, 1);
+        if (Math.abs(lift - lastLift) > 0.001) {
+          lastLift = lift;
+          cubes.forEach((c) => { c.el.style.transform = 'translate3d(0,' + (-lift * c.i * 26).toFixed(1) + 'px,0) ' + c.base; });
+        }
+      }
+    }
+
+    // horizontal work
+    if (workActive && workTrack) {
+      const p = workMax ? clamp((y - workTop) / workMax, 0, 1) : 0;
+      workTrack.style.transform = 'translate3d(' + (-p * workMax).toFixed(1) + 'px,0,0)';
+      if (workBar) workBar.style.transform = 'scaleX(' + p.toFixed(4) + ')';
+      if (workIdx) {
+        const idx = clamp(Math.round(p * (cardsN - 1)) + 1, 1, cardsN);
+        if (idx !== lastIdx) { lastIdx = idx; workIdx.textContent = pad(idx); }
+      }
+    }
+
+    // manifesto word highlight
+    if (words.length) {
+      const p = clamp((y + H * 0.85 - maniTop) / (maniH + H * 0.3), 0, 1);
+      if (Math.abs(p - lastMani) > 0.0005) {
+        lastMani = p;
+        const lit = p * words.length * 1.08;
+        words.forEach((w, i) => { w.style.opacity = (0.15 + 0.85 * clamp(lit - i, 0, 1)).toFixed(3); });
+      }
+    }
+
+    // process plan drawing
+    if (planGroups.length && !reduce && procH) {
+      const p = clamp((y + H * 0.6 - procTop) / (procH * 0.9), 0, 1);
+      if (Math.abs(p - lastProc) > 0.0005) {
+        lastProc = p;
+        planGroups.forEach((grp, k) => {
+          const local = clamp((p * 4 - k) * 1.25, 0, 1);
+          const n = grp.paths.length || 1;
+          grp.paths.forEach((el, j) => {
+            const e = clamp(local * 1.5 - (j / n) * 0.5, 0, 1);
+            el.style.strokeDashoffset = (1 - e).toFixed(4);
+          });
+          const on = local > 0.55;
+          if (on !== grp.on) { grp.on = on; grp.g.classList.toggle('on', on); }
+        });
+        const si = clamp(Math.floor(p * 4), 0, 3);
+        if (si !== lastStep) {
+          lastStep = si;
+          steps.forEach((s, i) => s.classList.toggle('is-active', i === si));
+          if (planStep) planStep.textContent = pad(si + 1);
+        }
+      }
+    }
+
+    // marquee
+    if (rows.length && !reduce && y + H > mqTop - 100 && y < mqTop + mqH + 100) {
+      const sk = clamp(vel * 0.4, -14, 14);
+      rows.forEach((r) => {
+        if (!r.w) return;
+        r.x += (1.2 + vel * 0.45) * r.dir * dt;
+        r.x = ((r.x % r.w) + r.w) % r.w;
+        r.inner.style.transform = 'translate3d(' + (-r.x).toFixed(1) + 'px,0,0) skewX(' + (-sk * r.dir).toFixed(2) + 'deg)';
+      });
+    }
+
+    // cursor
+    if (cursorOn) {
+      rx = lerp(rx, mx, 0.2);
+      ry = lerp(ry, my, 0.2);
+      dot.style.transform = 'translate3d(' + mx + 'px,' + my + 'px,0)';
+      ring.style.transform = 'translate3d(' + rx.toFixed(1) + 'px,' + ry.toFixed(1) + 'px,0)';
+    }
+
+    requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+
+  /* ---------- preloader ---------- */
+  const pre = $('.preloader');
+  const ready = () => root.classList.add('is-ready');
+  if (!pre || reduce) {
+    if (pre && pre.parentNode) pre.parentNode.removeChild(pre);
+    ready();
+  } else {
+    root.classList.add('is-loading');
+    const num = $('.pl-num', pre);
+    const bar = $('.pl-bar', pre);
+    const dur = 1100;
+    let t0 = 0, finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      pre.classList.add('is-done');
+      root.classList.remove('is-loading');
+      setTimeout(ready, 300);
+      setTimeout(() => { if (pre.parentNode) pre.parentNode.removeChild(pre); }, 1500);
+      scheduleMeasure();
+    };
+    const tick = (now) => {
+      if (!t0) t0 = now;
+      const t = clamp((now - t0) / dur, 0, 1);
+      const e = 1 - Math.pow(1 - t, 3);
+      if (num) num.textContent = String(Math.round(e * 100)).padStart(3, '0');
+      if (bar) bar.style.transform = 'scaleX(' + e.toFixed(3) + ')';
+      if (t < 1) requestAnimationFrame(tick);
+      else setTimeout(finish, 120);
+    };
+    requestAnimationFrame(tick);
+    setTimeout(finish, 3500);
+  }
+})();
+</script>
+</body>
+</html>

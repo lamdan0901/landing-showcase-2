@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="vi"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ba landing page, ba phong cách: Tinh Vân — nền tảng AI & dữ liệu, Trà Sơn Cước — trà Việt thủ công, KHỐI — studio kiến trúc.">
+  <meta name="theme-color" content="#eceae4"><title>Ba thế giới. Một chạm. — Landing Pages 02</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=Be+Vietnam+Pro:wght@400;500;600;800&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#eceae4; --ink:#1b1b1d; --muted:#66645e; --line:#1b1b1d26; --card:#f6f5f1; --accent:#5b4bdb; }
+    *, *::before, *::after { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:"Be Vietnam Pro","Segoe UI",sans-serif; -webkit-font-smoothing:antialiased; overflow-x:clip; }
+    a { color:inherit; text-decoration:none; }
+    img { display:block; max-width:100%; }
+    .wrap { width:min(1320px, 100% - 32px); margin-inline:auto; }
+    .skip { position:absolute; left:16px; top:-60px; background:var(--ink); color:var(--bg); padding:10px 14px; z-index:10; }
+    .skip:focus { top:12px; }
+    :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+
+    .gallery-header { display:flex; justify-content:space-between; align-items:center; gap:16px; height:93px; border-bottom:1px solid var(--line); }
+    .gallery-logo { font-weight:800; font-size:26px; letter-spacing:-.08em; }
+    .gallery-logo > span { font-size:14px; font-weight:500; letter-spacing:-.03em; margin-left:7px; }
+    .gallery-header > span { font-size:14px; letter-spacing:.1em; color:var(--muted); }
+    .header-explore { font-size:16px; border-bottom:1px solid var(--ink); padding-bottom:7px; white-space:nowrap; }
+    .header-explore > span { margin-left:20px; font-size:18px; display:inline-block; transition:transform .3s; }
+    .header-explore:hover > span { transform:translate(3px,3px); }
+
+    .gallery-intro { display:flex; justify-content:space-between; align-items:end; padding:65px 0 50px; gap:25px; }
+    .eyebrow { font-size:14px; letter-spacing:.16em; color:var(--muted); }
+    h1 { font-size:clamp(48px,5.8vw,85px); letter-spacing:-.065em; line-height:1.1; font-weight:600; margin:22px 0 0; }
+    h1 > em { font-family:"Cormorant Garamond",Georgia,serif; font-weight:500; letter-spacing:-.03em; font-size:1.08em;
+      background:linear-gradient(90deg,#5b4bdb,#2a9fb8 40%,#3d5d50 70%,#e0480f); -webkit-background-clip:text; background-clip:text; color:transparent;
+      background-size:200% 100%; animation:shimmer 9s ease-in-out infinite alternate; padding-right:.06em; }
+    @keyframes shimmer { to { background-position:100% 0; } }
+    .intro-mark { display:inline-block; width:.62em; height:.62em; margin-left:.25em; vertical-align:.02em; position:relative; }
+    .intro-mark i { position:absolute; inset:0; border:2px solid var(--ink); animation:turn 24s linear infinite; }
+    .intro-mark i:nth-child(2) { inset:22%; background:#e0480f; border:0; animation-duration:16s; animation-direction:reverse; }
+    @keyframes turn { to { transform:rotate(360deg); } }
+    .intro-note { padding-bottom:8px; min-width:245px; }
+    .note-rule { display:block; width:35px; height:1px; background:var(--muted); }
+    .intro-note p { font-size:16px; line-height:1.9; color:var(--muted); margin:18px 0 23px; }
+    .intro-note > span:last-child { font-size:14px; letter-spacing:.04em; color:var(--muted); }
+
+    .design-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:23px; }
+    .design-card { display:flex; flex-direction:column; background:var(--card); padding:19px; border:1px solid #d6d4cc; min-width:0;
+      transition:transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s; animation:rise .9s cubic-bezier(.2,.8,.2,1) both; }
+    .design-card:nth-child(2) { animation-delay:.1s; } .design-card:nth-child(3) { animation-delay:.2s; }
+    @keyframes rise { from { opacity:0; translate:0 28px; } }
+    .design-card:hover { transform:translateY(-8px); box-shadow:0 18px 36px #1b1b1d1c; }
+    .card-meta { display:flex; gap:12px; justify-content:space-between; align-items:start; font-size:14px; letter-spacing:.035em; margin-bottom:17px; }
+    .card-meta > span:last-child, .card-bottom .arrow { font-size:18px; transition:transform .35s; }
+    .design-card:hover .card-meta > span:last-child, .design-card:hover .card-bottom .arrow { transform:translate(3px,-3px); }
+    .preview { overflow:hidden; aspect-ratio:1.44; border:1px solid #1b1b1d18; position:relative; }
+    .preview img { width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.8,.2,1); }
+    .design-card:hover .preview img { transform:scale(1.04); }
+    .card-info { padding:25px 0 20px; display:flex; flex-direction:column; align-items:start; gap:16px; flex:1; }
+    .card-info h2 { margin:0; font-size:32px; font-weight:800; letter-spacing:-.06em; line-height:1.1; }
+    .card-info h2 > span { font:500 14px "Be Vietnam Pro",sans-serif; letter-spacing:0; vertical-align:top; margin:3px 0 0 3px; display:inline-block; }
+    .card-info p { font-size:16px; margin:7px 0 0; }
+    .style-chip { font-size:14px; padding:6px 10px; border:1px solid currentColor; border-radius:20px; white-space:nowrap; opacity:.8; }
+    .card-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:13px; border-top:1px solid; font-size:14px; letter-spacing:.05em; }
+
+    .tv-card { background:#0b0b1a; color:#e9e8ff; border-color:#0b0b1a; }
+    .tv-card .card-meta, .tv-card .card-bottom { color:#7fe3f2; }
+    .tv-card .card-bottom { border-color:#7fe3f230; }
+    .tv-card h2 { background:linear-gradient(90deg,#b9a8ff,#5fd4ea); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .tv-card .card-info p { color:#a7a6c8; }
+    .tv-card .style-chip { color:#b9a8ff; }
+    .tsc-card { background:#efe7d7; color:#2b2a24; border-color:#ddd2bc; }
+    .tsc-card h2 { font-family:"Cormorant Garamond",Georgia,serif; font-weight:500; font-size:40px; letter-spacing:-.02em; }
+    .tsc-card .card-meta, .tsc-card .card-bottom { color:#9b2f22; }
+    .tsc-card .card-bottom { border-color:#9b2f2230; }
+    .tsc-card .card-info p { color:#3d5d50; font-family:"Cormorant Garamond",Georgia,serif; font-style:italic; font-size:20px; }
+    .tsc-card .style-chip { color:#3d5d50; }
+    .khoi-card { background:#e4e2dc; color:#121212; border-color:#121212; }
+    .khoi-card h2 { font-family:Archivo,sans-serif; font-stretch:125%; font-weight:900; text-transform:uppercase; letter-spacing:-.04em; }
+    .khoi-card .card-meta, .khoi-card .card-bottom { font-family:ui-monospace,Consolas,monospace; text-transform:uppercase; }
+    .khoi-card .card-bottom { border-color:#121212; border-top-width:2px; }
+    .khoi-card .card-info p { color:#b93a07; font-weight:600; }
+    .khoi-card .style-chip { border-radius:0; }
+    .khoi-card:hover .card-bottom { color:#e0480f; }
+
+    .gallery-detail { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:28px 0; margin-top:23px; border-bottom:1px solid var(--line); font-size:14px; color:var(--muted); }
+    .gallery-detail > span:first-child { color:var(--ink); }
+    .gallery-detail i { font-style:normal; margin-right:7px; color:#e0480f; display:inline-block; animation:pulse 2.4s ease-in-out infinite; }
+    @keyframes pulse { 50% { opacity:.35; } }
+    .gallery-footer { padding:25px 0 30px; display:flex; align-items:center; justify-content:space-between; gap:20px; font-size:14px; color:var(--muted); }
+    .gallery-footer > span { color:var(--ink); letter-spacing:.08em; }
+    .gallery-footer p, .gallery-footer > a { font-size:16px; margin:0; }
+    .gallery-footer > a { color:var(--ink); }
+
+    @media (max-width:1100px) { .design-grid { grid-template-columns:repeat(2,1fr); } .intro-note { min-width:215px; } }
+    @media (max-width:800px) {
+      .gallery-header { height:75px; } .gallery-header > span { display:none; }
+      .gallery-intro { flex-direction:column; align-items:start; padding-block:45px 35px; }
+      .intro-note { display:flex; flex-wrap:wrap; align-items:center; column-gap:20px; width:100%; }
+      .intro-note p { margin:0; } .intro-note > span:last-child { width:100%; margin-top:20px; }
+      .design-grid { grid-template-columns:1fr; gap:24px; } .design-card { padding:20px; }
+      .card-info h2 { font-size:36px; } .tsc-card h2 { font-size:44px; }
+      .gallery-detail { flex-wrap:wrap; gap:17px; } .gallery-detail > span:first-child { width:100%; }
+      .gallery-footer { flex-wrap:wrap; } .gallery-footer > p { order:3; width:100%; }
+    }
+    @media (max-width:390px) { h1 { font-size:42px; } .header-explore > span { margin-left:10px; } }
+    @media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none !important; transition:none !important; } html { scroll-behavior:auto; } }
+  </style>
+</head><body>
+  <a class="skip" href="#main">Đến nội dung chính</a>
+  <header class="gallery-header wrap"><a href="index.html" class="gallery-logo">LP<span>— 02</span></a><span>BỘ SƯU TẬP THIẾT KẾ WEB / 2026</span><a class="header-explore" href="#designs">Chọn một thế giới <span aria-hidden="true">↘</span></a></header>
+  <main id="main" class="wrap">
+    <section class="gallery-intro">
+      <div><span class="eyebrow">03 THƯƠNG HIỆU. 03 PHONG CÁCH.</span><h1>Ba thế giới.<br><em>Một chạm.</em><span class="intro-mark" aria-hidden="true"><i></i><i></i></span></h1></div>
+      <div class="intro-note"><span class="note-rule"></span><p>Công nghệ, thủ công và kiến trúc —<br>mỗi trang một nhịp điệu,<br>một cách kể chuyện riêng.</p><span>THIẾT KẾ · NỘI DUNG · CHUYỂN ĐỘNG</span></div>
+    </section>
+    <section class="design-grid" id="designs" aria-label="Chọn thiết kế landing page">
+      <a class="design-card tv-card" href="tinh-van.html"><div class="card-meta"><span>01 / NỀN TẢNG AI &amp; DỮ LIỆU</span><span aria-hidden="true">↗</span></div><div class="preview"><img src="assets/tinh-van-preview.webp" alt="Xem trước landing page Tinh Vân: nền tối, tinh vân tím xanh và tiêu đề chữ gradient" width="1440" height="1000"></div><div class="card-info"><div><h2>Tinh Vân<span>®</span></h2><p>Biến dữ liệu rời rạc thành quyết định thông minh.</p></div><span class="style-chip">Tương lai · Huyền ảo</span></div><div class="card-bottom"><span>KHÁM PHÁ THIẾT KẾ</span><span class="arrow" aria-hidden="true">↗</span></div></a>
+      <a class="design-card tsc-card" href="tra-son-cuoc.html"><div class="card-meta"><span>02 / TRÀ VIỆT THỦ CÔNG</span><span aria-hidden="true">↗</span></div><div class="preview"><img src="assets/tra-son-cuoc-preview.webp" alt="Xem trước landing page Trà Sơn Cước: giấy dó màu kem, chén trà men ngọc và núi sương" width="1440" height="1000"></div><div class="card-info"><div><h2>Trà Sơn Cước<span>®</span></h2><p>Một chén trà, nghe núi rừng thở chậm.</p></div><span class="style-chip">Thanh tao · Chậm rãi</span></div><div class="card-bottom"><span>KHÁM PHÁ THIẾT KẾ</span><span class="arrow" aria-hidden="true">↗</span></div></a>
+      <a class="design-card khoi-card" href="khoi-studio.html"><div class="card-meta"><span>03 / KIẾN TRÚC &amp; NỘI THẤT</span><span aria-hidden="true">↗</span></div><div class="preview"><img src="assets/khoi-studio-preview.webp" alt="Xem trước landing page KHỐI: nền bê tông, chữ KHỐI khổng lồ và khối nhà isometric màu cam" width="1440" height="1000"></div><div class="card-info"><div><h2>Khối<span>®</span></h2><p>Dựng nhà để ở — không phải để chụp ảnh.</p></div><span class="style-chip">Táo bạo · Kỷ luật</span></div><div class="card-bottom"><span>KHÁM PHÁ THIẾT KẾ</span><span class="arrow" aria-hidden="true">↗</span></div></a>
+    </section>
+    <div class="gallery-detail"><span><i aria-hidden="true">◉</i> Mỗi trang là một thế giới riêng.</span><span>Tiếng Việt</span><span>Desktop &amp; mobile</span><span>Chuyển động có chủ đích</span></div>
+  </main>
+  <footer class="gallery-footer wrap"><span>LANDING PAGES — VOL. 02</span><p>Ba thương hiệu giả định. Một bộ sưu tập ý tưởng.</p><a href="#main">Về đầu trang ↑</a></footer>
+</body></html>
